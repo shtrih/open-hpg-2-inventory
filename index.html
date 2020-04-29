@@ -1,1 +1,53 @@
-Nothing to see here.
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Price Gauntlet 2.0 / ХПГ 2.0</title>
+    <style>
+        html {
+            background: #bbbbbb url('images/hpg2.jpg') no-repeat top center;
+            background-size: 100% auto;
+        }
+        body {
+            display: grid;
+            grid-template-areas:
+                "a a a"
+                "b b b"
+                "c . ."
+            ;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            font-family: calibri, serif;
+        }
+        nav {
+            grid-area: a;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        nav a {
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            font-size: 20px;
+            box-shadow: 1px 1px 0 #bbb;
+        }
+        div {
+            grid-area: c;
+
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/hpg-inventory/">Инвентарь ХПГ 2.0</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQC9pus_Q4cIS373WVR6xmLwV8l96LNTxnzQQnvaSxATD5ZrzNRQ5hLU0DVMJH1A22JBmv5-_thDHoM/pubhtml?widget=true&headers=false">Правила ХПГ, статусы участников</a>
+    </nav>
+    <div>
+        <iframe width="510" height="287" src="https://www.youtube.com/embed/yeOFRbvMHmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</body>
+</html>
