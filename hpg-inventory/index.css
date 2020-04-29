@@ -20,6 +20,9 @@ body {
 	top: 600px;
 	width: 100%;
 }
+.information > ul > li {
+	margin-top: 14px;
+}
 .inventory {
 	max-width: 100%;
 	user-select: none;
