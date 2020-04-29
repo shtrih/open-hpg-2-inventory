@@ -520,14 +520,17 @@ const inventory = $('.inventory'),
             cellUpdateDOM(i);
         }
     },
+    getStorageKeySuffix = function () {
+        return location.search.substring(1, 20);
+    },
     saveState = function (cellsArray) {
-        localStorage.setItem('cells', JSON.stringify(cellsArray));
+        localStorage.setItem('inventory-' + getStorageKeySuffix(), JSON.stringify(cellsArray));
     },
     loadState = function () {
         let result = [];
 
         try {
-            result = JSON.parse(localStorage.getItem('cells'));
+            result = JSON.parse(localStorage.getItem('inventory-' + getStorageKeySuffix()));
         } catch (e) {
             console.error('Loading state', e);
         }
