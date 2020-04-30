@@ -295,7 +295,7 @@ const inventory = $('.inventory'),
     cellControlsTemplate = $('<div class="controls"></div>')
         .append(controlDelete)
     ,
-    addCell = function () {
+    addCell = function (triggerClick=false) {
         const newCell = cellTemplate.clone();
         inventory.append(newCell);
 
@@ -304,6 +304,10 @@ const inventory = $('.inventory'),
         newCell.on('mouseleave', function () {
             $(this).find(cellControlsTemplate).detach()
         });
+
+        if (triggerClick) {
+            newCell.trigger('click');
+        }
     },
     cellUpdateDOM = function (key) {
         if (!cells[key] || !cells[key].item) {
@@ -350,7 +354,7 @@ const inventory = $('.inventory'),
     },
     addCellOnClick = function () {
         cells.push({});
-        addCell();
+        addCell(true);
         saveState();
     },
     cellOnHover = function () {
@@ -390,8 +394,6 @@ const inventory = $('.inventory'),
             data = {
                 cellsMargin: -14,
                 cells: [
-                    {},
-                    {},
                     {},
                 ]
             };
