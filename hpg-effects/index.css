@@ -157,22 +157,22 @@ body:hover .add-cell {
 	);
 }
 .DEBUFF .cell {
-	background-color: #a70000;
+	background-color: #b84040;
 	border-color: #a70000;
 }
 .TARGET_TRAP .cell {
-	background-color: #00d521;
-	border-color: #00d521;
+	background-color: #469c5d;
+	border-color: #356b3e;
 }
 .NONTARGET_TRAP .cell {
-	background-color: #caffbe;
-	border-color: #caffbe;
+	background-color: #a5b370;
+	border-color: #85935a;
 }
 .SPECIFIC_WHEEL_ROLL .cell {
-	background-color: #d500ce;
-	border-color: #d500ce;
+	background-color: #837dbd;
+	border-color: #6c6699;
 }
 .FOOD .cell {
-	background-color: #a4b7cb;
-	border-color: #a4b7cb;
+	background-color: #64a651;
+	border-color: #467a3d;
 }
