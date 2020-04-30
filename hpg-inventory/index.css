@@ -47,6 +47,27 @@ body {
 .cell img {
 	max-width: 100%;
 }
+.cell .count {
+	position: absolute;
+	top: -4px;
+	right: -2px;
+	width: 20px;
+	height: 20px;
+	/*border-width: 5px;*/
+	/*border-style: double;*/
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 50%;
+	border-color: #fff;
+	background: #6857d8;
+	color: #fff;
+	font-family: monospace;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px 0 #000;
+}
 .cell .controls {
 	box-sizing: border-box;
 	width: 100%;
