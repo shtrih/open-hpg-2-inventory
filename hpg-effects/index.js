@@ -1,416 +1,278 @@
 'use strict';
 
-let cells = [];
+let cells = [],
+    cellsMargin
+;
+const EFFECT_TYPES = {
+    NONE: 'NONE',
+    BUFF: 'BUFF',
+    DEBUFF: 'DEBUFF',
+    TARGET_TRAP: 'TARGET_TRAP',
+    NONTARGET_TRAP: 'NONTARGET_TRAP',
+    SPECIFIC_WHEEL_ROLL: 'SPECIFIC_WHEEL_ROLL',
+    FOOD: 'FOOD'
+};
 const items = [
     {
         img: 'images/000.png',
-        title: 'Пустая ячейка'
+        title: 'Пустая ячейка',
+        type: EFFECT_TYPES.NONE,
     },
     {
         img: 'images/001.png',
-        title: 'Мистер Ржавчик'
+        title: 'Мистер Ржавчик',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/002.png',
-        title: 'Облизанный ободок унитаза'
+        title: 'Облизанный ободок унитаза',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/003.png',
-        title: ''
+        title: 'Ловушка Джокера',
+        type: EFFECT_TYPES.TARGET_TRAP,
     },
     {
         img: 'images/004.png',
-        title: ''
+        title: 'Знаток выгоды',
+        type: EFFECT_TYPES.BUFF,
     },
     {
         img: 'images/005.png',
-        title: ''
+        title: 'Стримбернар',
+        type: EFFECT_TYPES.BUFF,
     },
     {
         img: 'images/006.png',
-        title: ''
+        title: 'В бухгалтерии все перепутали',
+        type: EFFECT_TYPES.NONTARGET_TRAP,
     },
     {
         img: 'images/007.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/008.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/009.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/010.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/011.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/012.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/013.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/014.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/015.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/016.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/017.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/018.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/019.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/020.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/021.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/022.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/023.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/024.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/025.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/026.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/027.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/028.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/029.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/030.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/031.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/032.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/033.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/034.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/035.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/036.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/037.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/038.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/039.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/040.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/041.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/042.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/043.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/044.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/045.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/046.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/047.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/048.png',
-        title: ''
+        title: '',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/049.png',
-        title: 'Падение пиццианской башни'
+        title: 'Падение пиццианской башни',
+        type: EFFECT_TYPES.DEBUFF,
     },
     {
         img: 'images/050.png',
-        title: 'Полное свинство'
-    },
-    {
-        img: 'images/051.png',
-        title: 'Щit',
-        count: 2,
-    },
-    {
-        img: 'images/052.png',
-        title: 'Комбинезон химзащиты'
-    },
-    {
-        img: 'images/053.png',
-        title: 'Рулон туалетной бумаги',
-        count: 2,
-    },
-    {
-        img: 'images/054.png',
-        title: 'Респиратор',
-        count: 10,
-    },
-    {
-        img: 'images/055.png',
-        title: 'Одноразовые перчатки'
-    },
-    {
-        img: 'images/056.png',
-        title: 'Банка шпината'
-    },
-    {
-        img: 'images/057.png',
-        title: 'Крышка от мусорного бака',
-    },
-    {
-        img: 'images/058.png',
-        title: 'Ремонтный набор',
-        count: 2,
-    },
-    {
-        img: 'images/059.png',
-        title: 'Антисептик'
-    },
-    {
-        img: 'images/060.png',
-        title: 'Рука для фистинга имени Билли Херрингтона',
-        count: 4,
-    },
-    {
-        img: 'images/061.png',
-        title: 'Сексуальные чулки',
-        count: 2,
-    },
-    {
-        img: 'images/062.png',
-        title: 'Четырехлистный клевер'
-    },
-    {
-        img: 'images/063.png',
-        title: 'Кукла вуду'
-    },
-    {
-        img: 'images/064.png',
-        title: 'Набор выживальщика',
-        count: 3,
-    },
-    {
-        img: 'images/065.png',
-        title: 'Наперсток удачи'
-    },
-    {
-        img: 'images/066.png',
-        title: 'Переносной телепорт'
-    },
-    {
-        img: 'images/067.png',
-        title: 'Футляр'
-    },
-    {
-        img: 'images/068.png',
-        title: 'Жилетка Вассермана',
-        count: 2,
-    },
-    {
-        img: 'images/069.png',
-        title: 'Стул мамы Мерфи',
-        count: 2,
-    },
-    {
-        img: 'images/070.png',
-        title: 'Шиш кебаб',
-        count: 7,
-    },
-    {
-        img: 'images/071.png',
-        title: 'Альпинистский трос'
-    },
-    {
-        img: 'images/072.png',
-        title: 'Хакерский компьютер'
-    },
-    {
-        img: 'images/073.png',
-        title: 'Корона короля петучей',
-        count: 3,
-    },
-    {
-        img: 'images/074.png',
-        title: 'Благословение Хакса',
-        count: 3,
-        isNotSlot: true
-    },
-    {
-        img: 'images/075.png',
-        title: 'Порошок прозрения',
-        count: 2
-    },
-
-    {
-        img: 'images/01.png',
-        title: 'Силовая броня (Корона короля петучей, Щit, Одноразовые перчатки)',
-        count: 2,
-        isNotSlot: true
-    },
-    {
-        img: 'images/02.png',
-        title: 'Костюм мудреца (Порошок прозрения, хакерский компьютер, Жилетка Вассермана)',
-        count: 3,
-        isNotSlot: true
-    },
-    {
-        img: 'images/03.png',
-        title: 'Костюм "Элегантный рекетир" (Наперсток удачи, сексуальные чулки, Рука для фистинга имени Билли Херрингтона)',
-        count: 3,
-        isNotSlot: true
-    },
-    {
-        img: 'images/04.png',
-        title: 'Костюм "Исследователь Пустошей" (Набор выживальщика, Комбинезон химзащиты, Крышка от мусорного бака)',
-        count: 3,
-        isNotSlot: true
-    },
-    {
-        img: 'images/05.png',
-        title: 'Рейдерские лохмотья (Шиш-Кебаб, Кукла вуду, Альпинистский трос)',
-        count: 2,
-        isNotSlot: true
+        title: 'Полное свинство',
+        type: EFFECT_TYPES.DEBUFF,
     },
 ];
 let selectedCellKey = false;
 
 const inventory = $('.inventory'),
-    cellTemplate = $('<div class="cell"><img/><div class="count">1</div></div>'),
-    controlIncrementCounter = $('<a/>', {
-        text: '+',
-        title: 'Увеличить кол-во зарядов/прочность',
-        class: 'inc',
-        href: '#',
-        click: function () {
-            const idx = $(this).closest('.cell').index();
-
-            if (cells[idx].count) {
-                cells[idx].count += 1;
-            }
-            else {
-                cells[idx].count = 2;
-            }
-            cellUpdateDOM(idx);
-            saveState(cells);
-
-            return false;
-        }
-    }),
-    controlDecrementCounter = $('<a/>', {
-        text: '–',
-        title: 'Уменьшить кол-во зарядов/прочность',
-        class: 'dec',
-        href: '#',
-        click: function () {
-            const idx = $(this).closest('.cell').index();
-
-            if (cells[idx].count && cells[idx].count > 1) {
-                cells[idx].count -= 1;
-            }
-            // кончились заряды
-            else if (cells[idx].count === 1) {
-                // пустая ячейка
-                cells[idx].item = items[0]
-            }
-            cellUpdateDOM(idx);
-            saveState(cells);
-
-            return false;
-        }
-    }),
-    controlNotSlot = $('<input/>', {
-        type: 'checkbox',
-        title: 'Предмет, не занимающий слот в инвентаре',
-        click: function (e) {
-            e.stopPropagation();
-
-            const idx = $(this).closest('.cell').index();
-
-            cells[idx].isNotSlot = $(this).is(':checked');
-            cellUpdateDOM(idx);
-            saveState(cells);
-        }
-    }),
+    cellTemplate = $('<div><div class="cell"><img/></div></div>'),
     controlDelete = $('<a/>', {
         text: '×',
         title: 'Удалить ячейку',
@@ -425,21 +287,17 @@ const inventory = $('.inventory'),
 
             $cell.find(cellControlsTemplate).detach();
             $cell.remove();
-            saveState(cells);
+            saveState();
 
             return false;
         }
     }),
     cellControlsTemplate = $('<div class="controls"></div>')
-        .append(controlDecrementCounter)
-        .append(controlIncrementCounter)
-        .append(controlNotSlot)
         .append(controlDelete)
     ,
     addCell = function () {
         const newCell = cellTemplate.clone();
         inventory.append(newCell);
-        $('.count', newCell).hide();
 
         newCell.on('click', cellOnClick);
         newCell.on('mouseenter', cellOnHover);
@@ -452,27 +310,15 @@ const inventory = $('.inventory'),
             return
         }
 
-        const $cell = inventory.children('.cell').eq(key);
+        const $cell = inventory.find('.cell').eq(key);
 
         $('img', $cell).attr({
             src: cells[key].item.img,
             title: cells[key].item.title
         });
 
-        if (cells[key].count && cells[key].count > 1) {
-            $('.count', $cell).show()
-        }
-        else {
-            $('.count', $cell).hide()
-        }
-        $('.count', $cell).text(cells[key].count);
-
-        if (cells[key].isNotSlot) {
-            $cell.addClass('not-slot');
-        }
-        else {
-            $cell.removeClass('not-slot');
-        }
+        const cellType = cells[key].item.type ? cells[key].item.type : EFFECT_TYPES.NONE;
+        $cell.parent().attr("class", cellType);
     },
     selectCell = function (key) {
         selectedCellKey = key;
@@ -505,14 +351,14 @@ const inventory = $('.inventory'),
     addCellOnClick = function () {
         cells.push({});
         addCell();
-        saveState(cells);
+        saveState();
     },
     cellOnHover = function () {
-        const idx = $(this).index();
-
-        controlNotSlot.prop('checked', Boolean(cells[idx].isNotSlot));
-
-        $(this).append(cellControlsTemplate);
+        $('.cell', this).append(cellControlsTemplate);
+    },
+    setCellMargin = function (number) {
+        cellsMargin = number;
+        document.documentElement.style.setProperty('--cell-margin-left', number + 'px');
     },
     createCells = function (cellsArray) {
         for (let i in cellsArray) {
@@ -523,27 +369,35 @@ const inventory = $('.inventory'),
     getStorageKeySuffix = function () {
         return location.search.substring(1, 20);
     },
-    saveState = function (cellsArray) {
-        localStorage.setItem('inventory-' + getStorageKeySuffix(), JSON.stringify(cellsArray));
+    saveState = function () {
+        const data = {
+            cells,
+            cellsMargin
+        };
+
+        localStorage.setItem('effects-' + getStorageKeySuffix(), JSON.stringify(data));
     },
     loadState = function () {
-        let result = [];
+        let data;
 
         try {
-            result = JSON.parse(localStorage.getItem('inventory-' + getStorageKeySuffix()));
+            data = JSON.parse(localStorage.getItem('effects-' + getStorageKeySuffix()));
         } catch (e) {
             console.error('Loading state', e);
         }
 
-        if (!result || !result.length) {
-            result = [
-                {},
-                {},
-                {},
-            ];
+        if (!data || !data.cells) {
+            data = {
+                cellsMargin: -14,
+                cells: [
+                    {},
+                    {},
+                    {},
+                ]
+            };
         }
 
-        return result;
+        ({cells, cellsMargin} = data);
     },
     selector = $('.selector'),
     selectorOnClick = function () {
@@ -551,12 +405,10 @@ const inventory = $('.inventory'),
 
         cells[selectedCellKey] = {
             item: items[$itemKey],
-            count: items[$itemKey].count || 1,
-            isNotSlot: items[$itemKey].isNotSlot || false
         };
         cellUpdateDOM(selectedCellKey);
 
-        saveState(cells);
+        saveState();
         selectCell(false);
         selector.hide();
     },
@@ -565,7 +417,7 @@ const inventory = $('.inventory'),
         for(let i in items) {
             list.append(
                 $('<li/>', {
-                    ['data-key']: i,
+                    'data-key': i,
                     html: $('<img/>', {
                         src: items[i].img,
                         title: items[i].title
@@ -574,13 +426,27 @@ const inventory = $('.inventory'),
                 })
             )
         }
+    },
+    loadMarginState = function () {
+        if (/^[-\d]+$/.test(cellsMargin)) {
+            setCellMargin(cellsMargin);
+            $('#cell-left-margin').val(cellsMargin);
+        }
     }
 ;
 
 $('.add-cell').on('click', addCellOnClick);
 
-cells = loadState();
+$('#cell-left-margin').on('change', function () {
+    setCellMargin($(this).val());
+    saveState()
+});
+
+loadState();
+
 console.log(cells);
+
+loadMarginState();
 createCells(cells);
 createSelector(items);
 

@@ -1,21 +1,22 @@
 :root {
 	--cell-width: 72px;
 	--max-width: calc(var(--cell-width) * 7);
+	--cell-margin-left: -14px;
 }
 body {
 	background: #20262E;
 	padding: 20px 0;
-	font-family: Helvetica, serif;
+	font-family: Calibri, serif;
 	max-width: var(--max-width);
 	margin: 0 auto;
 	box-sizing: border-box;
 	position: relative;
+	color: #eee;
 }
 .clear {
 	clear: both;
 }
 .information {
-	color: #eee;
 	position: absolute;
 	top: 600px;
 	width: 100%;
@@ -23,19 +24,29 @@ body {
 .information > ul > li {
 	margin-top: 14px;
 }
+.cell-left-margin {
+	margin-bottom: 10px;
+}
+.cell-left-margin label {
+	vertical-align: top;
+}
 .inventory {
 	max-width: 100%;
 	user-select: none;
+	/* Чтобы первая ячейка не обрезалась с краю в OBS */
+	margin-left: calc(var(--cell-margin-left) * -1);
 }
 .cell {
+	margin-left: var(--cell-margin-left);
 	position: relative;
 	float: left;
 	width: var(--cell-width);
 	height: var(--cell-width);
 	background-color: #ddd;
 	border: 4px ridge #d0733d;
-	margin-left: -0px;
 	box-sizing: border-box;
+	border-radius: 50%;
+	cursor: pointer;
 }
 .cell.active {
 	background-color: #dee;
@@ -69,16 +80,23 @@ body {
 	text-shadow: 1px 1px 0 #000;
 }
 .cell .controls {
-	box-sizing: border-box;
-	width: 100%;
-	background: #eed;
 	position: absolute;
-	bottom: 0
+	top: 0;
 }
 .cell .controls a {
-	padding: 0 2px;
+	display: block;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	font-size: 2em;
+	font-family: monospace;
 	text-decoration: none;
-	font-weight: bold;
+	border-radius: 50%;
+	border-color: #666;
+	border-style: solid;
+	border-width: 1px;
+	background: #eee;
+	text-align: center;
 }
 .cell .controls .remove {
 	color: #a70000;
@@ -108,7 +126,7 @@ body {
 .add-cell:hover {
 	background: #3a982f;
 }
-.add-block:hover .add-cell {
+body:hover .add-cell {
 	visibility: visible;
 }
 .add-cell:focus {
@@ -139,4 +157,43 @@ body {
 }
 .selector li img {
 	width: 100%;
+}
+.BUFF .cell {
+	--background-r: 61;
+	--background-g: 147;
+	--background-b: 208;
+
+	background-color: rgb(var(--background-r), var(--background-g), var(--background-b));
+	border-color: rgb(
+			calc(var(--background-r) - 20),
+			calc(var(--background-g) - 20),
+			calc(var(--background-b) - 20)
+	);
+}
+.BUFF .cell.active {
+	background-color: rgb(
+			calc(var(--background-r) + 20),
+			calc(var(--background-g) + 20),
+			calc(var(--background-b) + 20)
+	);
+}
+.DEBUFF .cell {
+	background-color: #a70000;
+	border-color: #a70000;
+}
+.TARGET_TRAP .cell {
+	background-color: #00d521;
+	border-color: #00d521;
+}
+.NONTARGET_TRAP .cell {
+	background-color: #caffbe;
+	border-color: #caffbe;
+}
+.SPECIFIC_WHEEL_ROLL .cell {
+	background-color: #d500ce;
+	border-color: #d500ce;
+}
+.FOOD .cell {
+	background-color: #a4b7cb;
+	border-color: #a4b7cb;
 }
