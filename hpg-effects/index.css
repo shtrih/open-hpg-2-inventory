@@ -1,0 +1,142 @@
+:root {
+	--cell-width: 72px;
+	--max-width: calc(var(--cell-width) * 7);
+}
+body {
+	background: #20262E;
+	padding: 20px 0;
+	font-family: Helvetica, serif;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	box-sizing: border-box;
+	position: relative;
+}
+.clear {
+	clear: both;
+}
+.information {
+	color: #eee;
+	position: absolute;
+	top: 600px;
+	width: 100%;
+}
+.information > ul > li {
+	margin-top: 14px;
+}
+.inventory {
+	max-width: 100%;
+	user-select: none;
+}
+.cell {
+	position: relative;
+	float: left;
+	width: var(--cell-width);
+	height: var(--cell-width);
+	background-color: #ddd;
+	border: 4px ridge #d0733d;
+	margin-left: -0px;
+	box-sizing: border-box;
+}
+.cell.active {
+	background-color: #dee;
+}
+.cell.not-slot {
+	float: right;
+	border-color: #3d93d0;
+}
+.cell img {
+	max-width: 100%;
+}
+.cell .count {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	/*border-width: 5px;*/
+	/*border-style: double;*/
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 50%;
+	border-color: #fff;
+	background: #6857d8;
+	color: #fff;
+	font-family: monospace;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px 0 #000;
+}
+.cell .controls {
+	box-sizing: border-box;
+	width: 100%;
+	background: #eed;
+	position: absolute;
+	bottom: 0
+}
+.cell .controls a {
+	padding: 0 2px;
+	text-decoration: none;
+	font-weight: bold;
+}
+.cell .controls .remove {
+	color: #a70000;
+}
+.cell .controls *:hover {
+	color: #FF0076;
+}
+.add-cell {
+	cursor: pointer;
+	float: left;
+	margin: 20px 0 20px 4px;
+	width: 32px;
+	height: 32px;
+	border-width: 5px;
+	border-radius: 50%;
+	border-color: #ddd;
+	border-style: double;
+	background: #2c7523;
+	color: #eee;
+	font-family: monospace;
+	font-size: 16px;
+	text-align: center;
+	line-height: 16px;
+	text-shadow: 1px 1px 0 #000;
+	visibility: hidden;
+}
+.add-cell:hover {
+	background: #3a982f;
+}
+.add-block:hover .add-cell {
+	visibility: visible;
+}
+.add-cell:focus {
+	outline: none;
+}
+.selector {
+	user-select: none;
+	display: none;
+	margin-top: 10px;
+	background: #bbb;
+	max-width: 100%;
+	overflow-y: scroll;
+	max-height: calc(var(--cell-width) * 3);
+}
+.selector ul {
+	margin: 0;
+	padding: 0;
+}
+.selector li {
+	list-style-type: none;
+	float: left;
+	width: var(--cell-width);
+	height: var(--cell-width);
+	box-sizing: border-box;
+}
+.selector li:hover {
+	background: #ddd;
+}
+.selector li img {
+	width: 100%;
+}

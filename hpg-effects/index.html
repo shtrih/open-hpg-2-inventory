@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Инвентарь стримера ХПГ 2.0</title>
+
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+<div class="inventory"></div>
+<div class="add-block">
+    <button class="add-cell" title="Добавить ячейку инвентаря">+</button>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+<div class="selector">
+    <ul></ul>
+    <div class="clear"></div>
+</div>
+
+<div class="information">
+    <ul>
+        <li>Для OBS предполагается использование через источник «Браузер». Размеры окна: ширина <code>504</code> (для 7 ячеек на строку), высота <code>490</code>. Ширину можно уменьшать кратно 72 пикселям.</li>
+        <li>Редактирование ячеек производится через опцию «Взаимодействовать» источника «Браузер».</li>
+        <li>Можно добавить несколько источников «Браузер», чтобы, например, разделить инвентари предметов и дебаффов. Чтобы каждый источник сохранял свой инвентарь отдельно, нужно к адресу ссылки дописать название хранилища: например, <code>?debaffy</code> (не более 20 символов). В конечном итоге, должны получиться ссылки вида:
+            <ul>
+                <li><code>https://he-pe.ga/hpg-inventory/?items</code></li>
+                <li><code>https://he-pe.ga/hpg-inventory/?debuffs</code></li>
+            </ul>
+        </li>
+        <li>Справа от последней ячейки (или снизу слева) есть кнопка «Добавить», которая отображается только при наведении на неё.</li>
+    </ul>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+        crossorigin="anonymous"></script>
+<script src="index.js"></script>
+</body>
+</html>
