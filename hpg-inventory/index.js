@@ -198,6 +198,21 @@ const inventory = $('.inventory'),
             return false;
         }
     }),
+    controlInvert = $('<a/>', {
+        text: '↑',
+        title: 'Инвертировать',
+        class: 'inversion',
+        href: '#',
+        click: function () {
+            const idx = $(this).closest('.cell').index();
+
+            cells[idx].inverted = !cells[idx].inverted;
+            cellUpdateDOM(idx);
+            saveState(cells);
+
+            return false;
+        }
+    }),
     controlNotSlot = $('<input/>', {
         type: 'checkbox',
         title: 'Предмет, не занимающий слот в инвентаре',
@@ -233,6 +248,7 @@ const inventory = $('.inventory'),
     cellControlsTemplate = $('<div class="controls"></div>')
         .append(controlDecrementCounter)
         .append(controlIncrementCounter)
+        .append(controlInvert)
         .append(controlNotSlot)
         .append(controlDelete)
     ,
@@ -272,6 +288,13 @@ const inventory = $('.inventory'),
         }
         else {
             $cell.removeClass('not-slot');
+        }
+
+        if (cells[key].inverted) {
+            $('img', $cell).addClass('inverted');
+        }
+        else {
+            $('img', $cell).removeClass('inverted');
         }
     },
     selectCell = function (key) {

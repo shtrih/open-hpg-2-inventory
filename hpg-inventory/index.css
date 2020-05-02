@@ -4,11 +4,10 @@
 }
 body {
 	background: #20262E;
-	padding: 20px 0;
+	padding: 15px;
 	font-family: Calibri, serif;
 	max-width: var(--max-width);
 	margin: 0 auto;
-	box-sizing: border-box;
 	position: relative;
 }
 .clear {
@@ -48,6 +47,10 @@ body {
 .cell img {
 	max-width: 100%;
 }
+.cell img.inverted {
+	transform: scaleY(-1);
+	filter: invert(1);
+}
 .cell .count {
 	position: absolute;
 	top: -4px;
@@ -71,13 +74,33 @@ body {
 }
 .cell .controls {
 	box-sizing: border-box;
-	width: 100%;
+	border-radius: 5px;
+	width: 100px;
 	background: #eed;
 	position: absolute;
-	bottom: 0
+	top: var(--cell-width);
+	left: -18px;
+	font-size: 32px;
+	font-family: monospace;
+	text-align: center;
+	z-index: 1;
+	box-shadow: 1px 1px 0 #20262E;
+}
+.cell .controls::before {
+	display: block;
+	top: 13px;
+	left: 50%;
+	transform: translate(-50%, calc(-100% - 5px)) rotate(45deg);
+
+	background-color: #eed;
+	content: ' ';
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	z-index: -1;
 }
 .cell .controls a {
-	padding: 0 2px;
+	color: #20262E;
 	text-decoration: none;
 	font-weight: bold;
 }
