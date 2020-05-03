@@ -36,6 +36,10 @@ body {
 	margin-left: -0px;
 	box-sizing: border-box;
 	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .cell.active {
 	background-color: #dee;
@@ -46,10 +50,11 @@ body {
 }
 .cell img {
 	max-width: 100%;
+	filter: drop-shadow(3px 3px 0 #50a04e);
 }
 .cell img.inverted {
 	transform: scaleY(-1);
-	filter: invert(1);
+	filter: drop-shadow(3px -3px 0 #900a);
 }
 .cell .count {
 	position: absolute;
@@ -78,7 +83,7 @@ body {
 	width: 100px;
 	background: #eed;
 	position: absolute;
-	top: var(--cell-width);
+	top: calc(var(--cell-width) - 4px);
 	left: -18px;
 	font-size: 32px;
 	font-family: monospace;
