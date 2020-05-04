@@ -16,7 +16,7 @@ body {
 .information {
 	color: #eee;
 	position: absolute;
-	top: 600px;
+	top: 550px;
 	width: 100%;
 }
 .information > ul > li {
