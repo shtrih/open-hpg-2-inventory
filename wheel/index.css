@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) 2020. shtrih
+ */
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #333;
+}
+canvas {
+	display: block;
+	position: absolute;
+}
