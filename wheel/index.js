@@ -9,7 +9,9 @@ let counter,
     animationsMap = new Map(),
     selectedKey,
     isCounterAnimation = false,
-    sss = 0;
+    sss = 0,
+    video
+;
 const data = [
     // 'Orel',
     // 'Orel',
@@ -57,35 +59,34 @@ const radius = 120,
     centerX = 80;
 
 function setup() {
-    frameRate(60);
-    createCanvas(600, 400);
+    const canvas = createCanvas(600, 400);
+    canvas.parent('canvas');
+
     circleTop = (height - diameter) / 2;
     circleCenterY = circleTop + radius;
     counterMax = data.length * height_str;
     counter = counterInitial;
     // counter = counterMax;
+    video = new Video([
+        'videos/2019-06-13 19-36-43.mkv',
+        'videos/HONK_HONK.mp4'
+    ]);
 
+    frameRate(60);
     textSize(23);
     textFont('Calibri');
     fill(200);
 
-    idle = function() {
-        animate(function(v) {
-            isCounterAnimation = true;
-            counter = v;
-            counterDelta = 1;
-        }, counter, counter + height_str, 1000, function() {
-            isCounterAnimation = false;
-            counterDelta = 0;
-            // setTimeout(idle, 1000);
-        }, easeInOutCubic);
-    };
-    // idle();
+    alignToRow();
 
     button = createButton('Roll');
     button.position(width / 2, height);
     button.mousePressed(function() {
         if (!isCounterAnimation) {
+            const duration = 20000;
+            video.play().catch(console.error);
+            decreaseVolume(duration);
+
             const correction = data_key(data.length, 2 - selectedKey);
             // const correction = 0;
             const randomKey = floor(random(data.length));
@@ -100,15 +101,25 @@ function setup() {
                 tickCounter,
                 counter,
                 counter + height_str * totalRows,
-                20000,
+                duration,
                 () => {
                     animCounterStop();
+                    video.pause();
                     alignToRow();
                 },
                 easeInOutSine
             );
         }
     });
+}
+
+function decreaseVolume(videoDurationMs) {
+    const decreasingDuration = 3000;
+    setTimeout(function () {
+        animate(function (v) {
+            video.setVolume(v);
+        }, video.volume, 0, decreasingDuration, null, easeLinear);
+    }, videoDurationMs - decreasingDuration);
 }
 
 function circlesCountForDataLength() {
@@ -132,6 +143,7 @@ function draw() {
     clear();
     // background(220);
 
+    //<editor-fold desc="Bezier">
     push();
     stroke(255, 102, 0);
     noFill();
@@ -210,6 +222,26 @@ function draw() {
     }
 
     pop();
+    //</editor-fold>
+
+    //<editor-fold desc="Vector">
+    push();
+    let overallDegrees = map(counter, counterInitial, counterMax, -90, 90);
+    let v = p5.Vector.fromAngle(radians(overallDegrees), radius);
+    let vx = v.x;
+    let vy = v.y;
+    let oneDegrees = map(counter, 0, diameter, -90, 90, true);
+    let oneV = p5.Vector.fromAngle(radians(oneDegrees), radius);
+    translate(centerX, height / 2);
+        noFill();
+        stroke(255);
+        line(0, 0, radius, 0);
+        stroke(250);
+        line(0, 0, vx, vy);
+        stroke(150);
+        line(0, 0, oneV.x, oneV.y);
+    pop();
+    //</editor-fold>
 
     animationsMap.forEach(function(startAnimation) {
         startAnimation();
@@ -250,45 +282,26 @@ function draw() {
 
         let key = data_key(data.length, i);
 
-        line(0, circleCenterY - height_str / 2, width, circleCenterY - height_str / 2);
+        // line(0, circleCenterY - height_str / 2, width, circleCenterY - height_str / 2);
         if (y < circleCenterY + height_str / 2
             && y > circleCenterY - height_str / 2
         ) {
             fill(255, 102, 0);
             stroke(255, 102, 0);
 
-            line(0, y, width, y);
+            // line(0, y, width, y);
 
             textSize(25);
             // textStyle(BOLD);
             selectedKey = key;
         }
-        line(0, circleCenterY + height_str / 2, width, circleCenterY + height_str / 2);
+        // line(0, circleCenterY + height_str / 2, width, circleCenterY + height_str / 2);
 
         text(key + '. ' + data[key], x, y - height_str/2 + padding, 300);
         pop()
     }
 
     text(`Выпало: ${data[selectedKey]}`, 0, height);
-
-    let overallDegrees = map(counter, counterInitial, counterMax, -90, 90);
-    let v = p5.Vector.fromAngle(radians(overallDegrees), radius);
-    let vx = v.x;
-    let vy = v.y;
-    let oneDegrees = map(counter, 0, diameter, -90, 90, true);
-    let oneV = p5.Vector.fromAngle(radians(oneDegrees), radius);
-    push();
-    //{
-        translate(centerX, height / 2);
-        noFill();
-        stroke(255);
-        line(0, 0, radius, 0);
-        stroke(250);
-        line(0, 0, vx, vy);
-        stroke(150);
-        line(0, 0, oneV.x, oneV.y);
-    //}
-    pop();
 }
 
 function incrementCounter(delta = 1) {
@@ -317,14 +330,26 @@ function data_key(data_len, key) {
     return data_key(data_len, data_len + key);
 }
 
-function alignToRow() {
+function alignToRow(endCallback) {
     const half = height_str / 2;
     const rest = counter % height_str;
     let newValue = counter - rest;
     if (rest > half) {
         newValue = counter + height_str - rest;
     }
-    animate(tickCounter, counter, newValue + padding, 1000, animCounterStop, easeOutBack);
+    animate(
+        tickCounter,
+        counter,
+        newValue + padding,
+        1000,
+        function () {
+            animCounterStop();
+            if (endCallback) {
+                endCallback();
+            }
+        },
+        easeOutBack
+    );
 }
 
 function tickCounter(v) {
@@ -389,6 +414,10 @@ function easeOutElastic(x) {
            x === 1 ?
            1 :
            pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1;
+}
+
+function easeLinear(x) {
+    return x;
 }
 
 /**

@@ -5,8 +5,16 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background: #333;
+	max-height: 800px;
 }
 canvas {
 	display: block;
 	position: absolute;
+}
+video {
+	position: absolute;
+	object-fit: cover;
+	height: 400px;
+	left: 400px;
+	display: none;
 }
