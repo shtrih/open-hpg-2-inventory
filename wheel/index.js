@@ -4,14 +4,24 @@
 
 let counter,
     counterDelta,
-    centerY,
+    circleTop,
     circleCenterY,
     animationsMap = new Map(),
     selectedKey,
     isCounterAnimation = false,
-    isNotBottomTransparencyAnimation = true,
     sss = 0;
 const data = [
+    // 'Orel',
+    // 'Orel',
+    // 'Orel',
+    // 'Orel',
+    // 'Orel',
+    // 'Reshka',
+    // 'Reshka',
+    // 'Reshka',
+    // 'Reshka',
+    // 'Reshka',
+    // 'Rebro',
     'Комбинезон химзащиты',
     'Рулон туалетной бумаги',
     'Респиратор',
@@ -40,19 +50,21 @@ const data = [
 
 const radius = 120,
     diameter = radius * 2,
-    count = 7,
+    itemsPerScreen = 7,
     padding = 10,
-    height_str = diameter / count - padding,
-    counterInitial = -(height_str), //   + padding
+    height_str = diameter / itemsPerScreen,
+    counterInitial = 0, //   + padding
     centerX = 80;
 
 function setup() {
-    frameRate(24);
+    frameRate(60);
     createCanvas(600, 400);
-    centerY = (height - diameter) / 2;
-    circleCenterY = centerY + radius;
-    cyclesCount = (data.length - 1) * (height_str + padding) + padding;
+    circleTop = (height - diameter) / 2;
+    circleCenterY = circleTop + radius;
+    counterMax = data.length * height_str;
     counter = counterInitial;
+    // counter = counterMax;
+
     textSize(23);
     textFont('Calibri');
     fill(200);
@@ -62,39 +74,46 @@ function setup() {
             isCounterAnimation = true;
             counter = v;
             counterDelta = 1;
-        }, counter, counter + height_str + padding, 1000, function() {
+        }, counter, counter + height_str, 1000, function() {
             isCounterAnimation = false;
             counterDelta = 0;
             // setTimeout(idle, 1000);
         }, easeInOutCubic);
-    }
+    };
     // idle();
 
     button = createButton('Roll');
     button.position(width / 2, height);
     button.mousePressed(function() {
         if (!isCounterAnimation) {
-            // counter = counterInitial;
-            // const correction = data.length - selectedKey;
-            const correction = 0;
+            const correction = data_key(data.length, 2 - selectedKey);
+            // const correction = 0;
             const randomKey = floor(random(data.length));
-            //const randomKey = 0;
-            button.elt.textContent = `Result ${randomKey} → ${data[data_key(data.length, 2 -randomKey)]}`;
-// const totalRows = 1;
+            // const randomKey = 2;
+            $dataKey = data_key(data.length, 2 - randomKey);
+            button.elt.textContent = `Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`;
+            print(circlesCountForDataLength());
 
-            const totalRows = (data.length + randomKey + correction);
+            const totalRows = (data.length * circlesCountForDataLength() + randomKey - correction);
+            print(totalRows);
             animate(
                 tickCounter,
                 counter,
-                counter + (height_str + padding) * totalRows,
-                15000,
+                counter + height_str * totalRows,
+                20000,
                 () => {
                     animCounterStop();
                     alignToRow();
-                }
+                },
+                easeInOutSine
             );
         }
     });
+}
+
+function circlesCountForDataLength() {
+    const needHeight = height_str * itemsPerScreen * 5;
+    return ceil(needHeight / (height_str * data.length));
 }
 
 function mouseReleased() {
@@ -150,7 +169,7 @@ function draw() {
       ellipse(x, y, 5, 5);
     } */
 
-    let c = floor(map(counter, counterInitial, cyclesCount, 0, radius, true)) / radius;
+    let c = floor(map(counter, counterInitial, counterMax, 0, radius, true)) / radius;
     let x = bezierPoint(x1, x2, x3, x4, c);
     let y = bezierPoint(y1, y2, y3, y4, c);
 
@@ -184,7 +203,7 @@ function draw() {
     );
 
     for (let i = 0; i <= steps; i++) {
-        let t = i / steps;
+        let t = i / steps + c;
         let x = bezierPoint(x1, x2, x3, x4, t);
         let y = bezierPoint(y1, y2, y3, y4, t);
         ellipse(x, y, 5, 5);
@@ -197,7 +216,7 @@ function draw() {
     });
 
     if (counterDelta > 0) {
-        if (counter < cyclesCount) {
+        if (counter < counterMax) {
             if (!isCounterAnimation) {
                 incrementCounter(1);
             }
@@ -206,23 +225,23 @@ function draw() {
         }
     } else {
         if (counter < counterInitial) {
-            counter = cyclesCount;
+            counter = counterMax;
         }
         // else {
         //   incrementCounter(-1);
         // }
     }
-    text(`${counter.toFixed(2)}, ${counterDelta}, ${cyclesCount}, ${isCounterAnimation}, ${deltaTime.toFixed(2)}`, 20, 20)
+    text(`${counter.toFixed(2)}, ${counterDelta}, ${counterMax}, ${isCounterAnimation}, ${deltaTime.toFixed(2)}`, 20, 20)
 
-    for (let i = -data.length; i < count + 1; i++) {
-        let x = crcl(counter + (height_str + padding) * i, radius, centerY, centerX);
-        let y = counter + (height_str + padding) * i + radius;
+    for (let i = -data.length-1; i < itemsPerScreen + 1; i++) {
+        let x = crcl(counter + height_str * i, radius, circleTop, centerX);
+        let y = counter + height_str * i + radius;
 
-        push()
+        push();
         //rectMode(RADIUS);
         //rectMode(CORNER);
         //rectMode(CORNERS);
-        //translate(0, -(height_str + padding)/2 - padding);
+        //translate(0, -(height_str )/2 - padding);
         translate(40, 0);
 
 
@@ -231,9 +250,9 @@ function draw() {
 
         let key = data_key(data.length, i);
 
-        line(0, circleCenterY - (height_str + padding) / 2, width, circleCenterY - (height_str + padding) / 2);
-        if (y < circleCenterY + (height_str + padding) / 2
-            && y > circleCenterY - (height_str + padding) / 2
+        line(0, circleCenterY - height_str / 2, width, circleCenterY - height_str / 2);
+        if (y < circleCenterY + height_str / 2
+            && y > circleCenterY - height_str / 2
         ) {
             fill(255, 102, 0);
             stroke(255, 102, 0);
@@ -244,15 +263,15 @@ function draw() {
             // textStyle(BOLD);
             selectedKey = key;
         }
-        line(0, circleCenterY + (height_str + padding) / 2, width, circleCenterY + (height_str + padding) / 2);
+        line(0, circleCenterY + height_str / 2, width, circleCenterY + height_str / 2);
 
-        text(key + '. ' + data[key], x, y - (height_str + padding)/2 + padding, 300);
+        text(key + '. ' + data[key], x, y - height_str/2 + padding, 300);
         pop()
     }
 
     text(`Выпало: ${data[selectedKey]}`, 0, height);
 
-    let overallDegrees = map(counter, counterInitial, cyclesCount, -90, 90);
+    let overallDegrees = map(counter, counterInitial, counterMax, -90, 90);
     let v = p5.Vector.fromAngle(radians(overallDegrees), radius);
     let vx = v.x;
     let vy = v.y;
@@ -295,17 +314,17 @@ function data_key(data_len, key) {
         return data_key(data_len, abs(data_len - key));
     }
 
-    return data_key(data_len, abs(data_len + key));
+    return data_key(data_len, data_len + key);
 }
 
 function alignToRow() {
-    const half = (height_str + padding) / 2;
-    const rest = counter % (height_str + padding);
+    const half = height_str / 2;
+    const rest = counter % height_str;
     let newValue = counter - rest;
     if (rest > half) {
-        newValue = counter + height_str + padding - rest;
+        newValue = counter + height_str - rest;
     }
-    animate(tickCounter, counter, newValue + padding, 1000, animCounterStop);
+    animate(tickCounter, counter, newValue + padding, 1000, animCounterStop, easeOutBack);
 }
 
 function tickCounter(v) {
@@ -330,8 +349,8 @@ function animCounterStop() {
 }
 
 function animate(tickHook, startNum, endNum, duration, callback, easingEq) {
-    var easingEq = easingEq || easeInOutCubic,
-        changeInNum = endNum - startNum,
+    easingEq = easingEq || easeOutExpo;
+    var changeInNum = endNum - startNum,
         startTime = Date.now(), //millis(),
         engine = function() {
             var now = Date.now(), //millis(),
@@ -340,7 +359,7 @@ function animate(tickHook, startNum, endNum, duration, callback, easingEq) {
                 completionNorm = easingEq(timeNorm),
                 newNum = startNum + completionNorm * changeInNum;
 
-            text(`${startNum}:${endNum}=${newNum}`, 0, height - 30)
+            text(`${startNum}:${endNum}=${newNum}`, 0, height - 30);
 
             if (timeSpent > duration) {
                 // clearTimeout(engine);
@@ -357,6 +376,11 @@ function animate(tickHook, startNum, endNum, duration, callback, easingEq) {
     animationsMap.set(`${startNum},${endNum},${duration}`, engine);
 }
 
+/**
+ * @see https://easings.net/#easeOutElastic
+ * @param x
+ * @return {number}
+ */
 function easeOutElastic(x) {
     const c4 = (2 * Math.PI) / 3;
 
@@ -367,6 +391,55 @@ function easeOutElastic(x) {
            pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1;
 }
 
+/**
+ * @see https://easings.net/#easeInOutCubic
+ * @param x
+ * @return {number}
+ */
 function easeInOutCubic(x) {
     return x < 0.5 ? 4 * x * x * x : 1 - pow(-2 * x + 2, 3) / 2;
+}
+
+/**
+ * @see https://easings.net/#easeOutBack
+ * @param x
+ * @return {number}
+ */
+function easeOutBack(x) {
+    const c1 = 1.70158;
+    const c3 = c1 + 1;
+
+    return 1 + c3 * pow(x - 1, 3) + c1 * pow(x - 1, 2);
+}
+
+/**
+ * @see https://easings.net/#easeOutExpo
+ * @param x
+ * @return {number}
+ */
+function easeOutExpo(x) {
+    return x === 1 ? 1 : 1 - pow(2, -10 * x);
+}
+
+/**
+ * @see https://easings.net/#easeInOutExpo
+ * @param x
+ * @return {number}
+ */
+function easeInOutExpo(x) {
+    return x === 0
+           ? 0
+           : x === 1
+             ? 1
+             : x < 0.5 ? pow(2, 20 * x - 10) / 2
+                       : (2 - pow(2, -20 * x + 10)) / 2;
+}
+
+/**
+ * @see https://easings.net/#easeInOutSine
+ * @param x
+ * @return {number}
+ */
+function easeInOutSine(x) {
+    return -(cos(PI * x) - 1) / 2;
 }
