@@ -10,9 +10,12 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <video preload="auto">
-        <source />
-    </video>
+    <div id="video">
+        <video preload="auto">
+            <source />
+        </video>
+        <div class="overlay"></div>
+    </div>
     <div id="canvas"></div>
     <input id="volume-control" type="range" step="0.1" value="0.5" max="1" min="0" title="Громкость видео" />
 </body>

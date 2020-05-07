@@ -4,17 +4,31 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	background: #333;
+	background: #19153a;
 	max-height: 800px;
+	overflow: hidden;
 }
 canvas {
 	display: block;
 	position: absolute;
 }
-video {
+#video {
 	position: absolute;
-	object-fit: cover;
-	height: 400px;
 	left: 400px;
+}
+#video video {
+	height: 400px;
+	object-fit: cover;
 	display: none;
+}
+#video .overlay {
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-image: url("rect4136.png");
+}
+#volume-control {
+	position: absolute;
+	bottom: 0;
 }
