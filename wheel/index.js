@@ -128,12 +128,20 @@ function circlesCountForDataLength() {
 }
 
 function mouseReleased() {
+    if (mouseX > width || mouseY > height) {
+        return;
+    }
+
     if (!isCounterAnimation) {
         setTimeout(alignToRow, 1000);
     }
 }
 
 function mouseDragged(event) {
+    if (mouseX > width || mouseY > height) {
+        return;
+    }
+
     incrementCounter(movedY);
 
     return false;
