@@ -13,8 +13,10 @@ class Video {
         /**@type HTMLSourceElement*/
         this._source = this._video.firstElementChild;
         this._range = document.getElementById('volume-control');
+        this._loadVolume();
         this._range.addEventListener('change', () => {
             this.setVolume(this._range.value);
+            this._saveVolume();
         });
         this.randomizeVideo();
     }
@@ -52,5 +54,16 @@ class Video {
 
     _getRandomIndex() {
         return Math.floor(Math.random() * this._urls.length);
+    }
+
+    _saveVolume() {
+        storeItem('volume', this._range.value * 10);
+    }
+
+    _loadVolume() {
+        const vol = getItem('volume');
+        if (typeof(vol) === "number") {
+            this._range.value = vol / 10;
+        }
     }
 }
