@@ -279,7 +279,7 @@ const inventory = $('.inventory'),
         class: 'remove',
         href: '#',
         click: function () {
-            const $cell = $(this).closest('.cell'),
+            const $cell = $(this).closest('.cell').parent(),
                 idx = $cell.index();
 
             delete cells[idx];
