@@ -4,21 +4,22 @@
 	--cell-margin-left: -14px;
 }
 body {
-	background: #20262E;
+	background: transparent;
 	padding: 20px 0;
 	font-family: Calibri, serif;
 	max-width: var(--max-width);
 	margin: 0 auto;
 	box-sizing: border-box;
 	position: relative;
-	color: #eee;
+	color: #20262E;
+	overflow: hidden;
 }
 .clear {
 	clear: both;
 }
 .information {
 	position: absolute;
-	top: 550px;
+	top: 500px;
 	width: 100%;
 }
 .information > ul > li {

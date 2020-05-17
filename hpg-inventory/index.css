@@ -3,20 +3,21 @@
 	--max-width: calc(var(--cell-width) * 7);
 }
 body {
-	background: #20262E;
+	background: transparent;
 	padding: 15px;
 	font-family: Calibri, serif;
 	max-width: var(--max-width);
 	margin: 0 auto;
 	position: relative;
+	color: #20262E;
+	overflow: hidden;
 }
 .clear {
 	clear: both;
 }
 .information {
-	color: #eee;
 	position: absolute;
-	top: 550px;
+	top: 500px;
 	width: 100%;
 }
 .information > ul > li {

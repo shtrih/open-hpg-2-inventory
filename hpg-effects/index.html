@@ -12,11 +12,6 @@
 </head>
 <body>
 
-<div class="cell-left-margin obs-hide">
-    <label for="cell-left-margin">Степень наложения ячеек:</label>
-    <input id="cell-left-margin" type="range" step="1" min="-50" max="0" value="0" />
-</div>
-
 <div class="inventory"></div>
 <div class="add-block">
     <button class="add-cell" title="Добавить ячейку">+</button>
@@ -29,21 +24,28 @@
     <div class="clear"></div>
 </div>
 
-<div class="information obs-hide">
-    <h1>Настройка OBS</h1>
-    <ol>
-        <li>Добавить 2 источника «Браузер» (не копированием). Идея в том, что первый источник отображается на сцене, а второй скрыт, так как в нём производится редактирование ячеек через опцию  «Взаимодействовать».</li>
-        <li>Вставить ссылку на эту страницу.</li>
-        <li>Ширина: <code>504</code> (для 7 ячеек на строку), высота: <code>500</code>. Ширину можно уменьшать кратно 72 пикселам.</li>
-        <li>
-            CSS для видимого источника:
-            <pre>
-body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
-.obs-hide { display: none; }</pre>
-        </li>
-        <li>Включить опцию «<input type="checkbox" checked disabled /> Обновить браузер, когда сцена становится активной».</li>
-        <li>После редактирования ячеек нужно переключить видимость первого источника, чтобы подгрузить сделанные изменения.</li>
-    </ol>
+<div class="information">
+    <div class="cell-left-margin obs-hide">
+        <label for="cell-left-margin">Степень наложения ячеек:</label>
+        <input id="cell-left-margin" type="range" step="1" min="-50" max="0" value="0" />
+    </div>
+
+    <div class="obs-hide">
+        <h1>Настройка OBS</h1>
+        <ol>
+            <li>Добавить 2 источника «Браузер» (не копированием). Идея в том, что первый источник отображается на сцене, а второй скрыт, так как в нём производится редактирование ячеек через опцию  «Взаимодействовать».</li>
+            <li>Вставить ссылку на эту страницу.</li>
+            <li>Ширина: <code>504</code> (для 7 ячеек на строку), высота: <code>500</code>. Ширину можно уменьшать кратно 72 пикселам.</li>
+            <li>
+                CSS для видимого источника:
+                <pre>
+    body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
+    .obs-hide { display: none; }</pre>
+            </li>
+            <li>Включить опцию «<input type="checkbox" checked disabled /> Обновить браузер, когда сцена становится активной».</li>
+            <li>После редактирования ячеек нужно переключить видимость первого источника, чтобы подгрузить сделанные изменения.</li>
+        </ol>
+    </div>
 </div>
 
 <script
