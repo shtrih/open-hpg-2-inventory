@@ -2,26 +2,16 @@
  * Copyright (c) 2020. shtrih
  */
 
-let counter,
-    counterDelta,
-    circleTop,
-    circleCenterY,
-    animationsMap = new Map(),
-    selectedKey,
-    isCounterAnimation = false,
-    sss = 0,
-    video
-;
 const data = [
     // 'Orel',
-    // 'Orel',
-    // 'Orel',
-    // 'Orel',
+    // 'Reshka',
     // 'Orel',
     // 'Reshka',
+    // 'Orel',
     // 'Reshka',
+    // 'Orel',
     // 'Reshka',
-    // 'Reshka',
+    // 'Orel',
     // 'Reshka',
     // 'Rebro',
     'Комбинезон химзащиты',
@@ -50,52 +40,79 @@ const data = [
     'Порошок прозрения',
 ];
 
-const radius = 120,
+const radius = 160,
     diameter = radius * 2,
     itemsPerScreen = 7,
-    padding = 10,
+    padding = 0,
     height_str = diameter / itemsPerScreen,
-    counterInitial = 0, //   + padding
-    centerX = 80;
+    counterInitial = 0,
+    counterMax = data.length * height_str,
+    centerX = 60
+;
+let counter,
+    counterDelta = 0,
+    circleTop,
+    circleCenterY,
+    animationsMap = new Map(),
+    selectedKey,
+    isCounterAnimation = false,
+    counterPrevTickValue = 0,
+    video,
+    scaleFactor,
+    fontRegular
+;
+
+function preload() {
+    fontRegular = loadFont('./Oswald-Regular.ttf');
+}
 
 function setup() {
-    const canvas = createCanvas(600, 400);
+    const canvas = createCanvas(750, 400);
     canvas.parent('canvas');
 
     circleTop = (height - diameter) / 2;
     circleCenterY = circleTop + radius;
-    counterMax = data.length * height_str;
+    // counter = height_str * 3 + radius - circleTop + radius;
     counter = counterInitial;
-    // counter = counterMax;
+    // counter = height_str/2;
     video = new Video([
-        'videos/2019-06-13 19-36-43.mkv',
-        'videos/HONK_HONK.mp4'
+        // 'videos/2019-06-13 19-36-43.mkv',
+        // 'videos/HONK_HONK.mp4',
+        'videos/14278244937910.webm',
+        'videos/14286028220660.webm',
+        'videos/14503864709740.webm',
+        'videos/14686000376951.webm',
+        'videos/15372952606420.mp4',
     ]);
 
-    frameRate(60);
+    // frameRate(30);
     textSize(23);
-    textFont('Calibri');
+    // textFont('Calibri');
+    textFont(fontRegular);
+    textLeading(24);
     fill(200);
 
-    alignToRow();
+    // alignToRow();
+
+    const background = document.querySelector('.image-grid');
 
     button = createButton('Roll');
-    button.position(width / 2, height);
+    button.parent(document.querySelector('.content'));
+    // button.position(width / 2, height);
     button.mousePressed(function() {
         if (!isCounterAnimation) {
-            const duration = 20000;
+            const duration = 20000,
+                correction = data_key(data.length, 2 - selectedKey),
+                randomKey = floor(random(data.length)),
+                totalRows = (data.length * circlesCountForDataLength() + randomKey - correction)
+            ;
             video.play().catch(console.error);
             decreaseVolume(duration);
 
-            const correction = data_key(data.length, 2 - selectedKey);
-            // const correction = 0;
-            const randomKey = floor(random(data.length));
-            // const randomKey = 2;
-            $dataKey = data_key(data.length, 2 - randomKey);
+            const $dataKey = data_key(data.length, 2 - randomKey);
             button.elt.textContent = `Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`;
-            print(circlesCountForDataLength());
 
-            const totalRows = (data.length * circlesCountForDataLength() + randomKey - correction);
+            print(circlesCountForDataLength());
             print(totalRows);
             animate(
                 tickCounter,
@@ -106,10 +123,17 @@ function setup() {
                     animCounterStop();
                     video.pause();
                     alignToRow();
+                    // background.style.display = null;
+                    background.classList = 'image-grid';
                 },
                 easeInOutSine
             );
         }
+
+        // background.style.display = 'none';
+        background.classList = 'image-grid animation-paused';
+
+        return false;
     });
 }
 
@@ -131,18 +155,22 @@ function mouseReleased() {
     if (mouseX > width || mouseY > height) {
         return;
     }
-
-    if (!isCounterAnimation) {
-        setTimeout(alignToRow, 1000);
+    if (isCounterAnimation) {
+        return;
     }
+
+    // setTimeout(alignToRow, 1000);
 }
 
 function mouseDragged(event) {
     if (mouseX > width || mouseY > height) {
         return;
     }
+    if (isCounterAnimation) {
+        return;
+    }
 
-    incrementCounter(movedY);
+    incrementCounter(movedY * 3);
 
     return false;
 }
@@ -150,6 +178,7 @@ function mouseDragged(event) {
 function draw() {
     clear();
     // background(220);
+/*
 
     //<editor-fold desc="Bezier">
     push();
@@ -182,12 +211,12 @@ function draw() {
     );
 
     let steps = 10;
-    /* for (let i = 0; i <= steps; i++) {
+    /!* for (let i = 0; i <= steps; i++) {
       let t = i / steps;
       let x = bezierPoint(x1, x2, x3, x4, t);
       let y = bezierPoint(y1, y2, y3, y4, t);
       ellipse(x, y, 5, 5);
-    } */
+    } *!/
 
     let c = floor(map(counter, counterInitial, counterMax, 0, radius, true)) / radius;
     let x = bezierPoint(x1, x2, x3, x4, c);
@@ -231,25 +260,9 @@ function draw() {
 
     pop();
     //</editor-fold>
+*/
 
-    //<editor-fold desc="Vector">
-    push();
-    let overallDegrees = map(counter, counterInitial, counterMax, -90, 90);
-    let v = p5.Vector.fromAngle(radians(overallDegrees), radius);
-    let vx = v.x;
-    let vy = v.y;
-    let oneDegrees = map(counter, 0, diameter, -90, 90, true);
-    let oneV = p5.Vector.fromAngle(radians(oneDegrees), radius);
-    translate(centerX, height / 2);
-        noFill();
-        stroke(255);
-        line(0, 0, radius, 0);
-        stroke(250);
-        line(0, 0, vx, vy);
-        stroke(150);
-        line(0, 0, oneV.x, oneV.y);
-    pop();
-    //</editor-fold>
+    vect(counter, counterInitial, counterMax);
 
     animationsMap.forEach(function(startAnimation) {
         startAnimation();
@@ -271,45 +284,69 @@ function draw() {
         //   incrementCounter(-1);
         // }
     }
-    text(`${counter.toFixed(2)}, ${counterDelta}, ${counterMax}, ${isCounterAnimation}, ${deltaTime.toFixed(2)}`, 20, 20)
+    // text(`${Math.floor(frameRate())} ${counter.toFixed(2)}, ${counterDelta.toFixed(2)}`, 20, 20);
 
-    for (let i = -data.length-1; i < itemsPerScreen + 1; i++) {
-        let x = crcl(counter + height_str * i, radius, circleTop, centerX);
-        let y = counter + height_str * i + radius;
+    for (let i = -data.length - 2; i < itemsPerScreen + 1; i++) {
+        // let x = crcl(counter + height_str * i, radius, circleTop, centerX);
+        let {x, y} = vect(counter + height_str * i + radius, circleTop, circleTop + diameter, false);
+        // x += centerX;
+        if (x < centerX - 30) {
+            continue;
+        }
 
         push();
-        //rectMode(RADIUS);
-        //rectMode(CORNER);
-        //rectMode(CORNERS);
-        //translate(0, -(height_str )/2 - padding);
-        translate(40, 0);
+        translate(centerX, circleCenterY);
 
+        // textSize(map(x, centerX, centerX + radius, 18, 24, true));
 
-        textSize(map(x, centerX, centerX + radius, 15, 23, true));
-        fill(255, round(map(x, centerX, centerX + radius, 0, 255, true)));
+        scaleFactor = map(x, centerX, centerX + radius, 1, 1.5, false);
+        x = x * (2 - scaleFactor);
+        y = y * (2 - scaleFactor);
+        scale(scaleFactor);
+
+        fill(255, Math.round(map(x + 50, centerX, centerX + radius, 0, 255, true)));
 
         let key = data_key(data.length, i);
-
-        // line(0, circleCenterY - height_str / 2, width, circleCenterY - height_str / 2);
-        if (y < circleCenterY + height_str / 2
-            && y > circleCenterY - height_str / 2
+        // stroke(255, 102, 110);
+        // line(0, -textAscent()/2, width, -textAscent()/2);
+        if (y < textAscent() / 2
+            && y > -textAscent()
         ) {
             fill(255, 102, 0);
-            stroke(255, 102, 0);
+            noStroke();
 
+            // stroke(255, 102, 110);
             // line(0, y, width, y);
 
-            textSize(25);
+            // textSize(25);
             // textStyle(BOLD);
             selectedKey = key;
         }
-        // line(0, circleCenterY + height_str / 2, width, circleCenterY + height_str / 2);
+        // line(0, textAscent(), width, textAscent());
 
-        text(key + '. ' + data[key], x, y - height_str/2 + padding, 300);
+        text(data[key], x, y, 400);
         pop()
     }
 
-    text(`Выпало: ${data[selectedKey]}`, 0, height);
+    // text(`Выпало: ${data[selectedKey]}`, 0, height);
+}
+
+function vect(current, from, to, overflow = true) {
+    const offset = -11.44, // выравниваем центральный элемент списка вертикально по центру
+        overallDegrees = map(current + offset, from + offset, to, -80, 80, !overflow),
+        v = p5.Vector.fromAngle(radians(overallDegrees), radius)
+    ;
+
+    // push();
+    // translate(centerX, height / 2);
+    // noFill();
+    // stroke(255);
+    // line(0, 0, radius, 0);
+    // stroke(250);
+    // line(0, 0, v.x, v.y);
+    // pop();
+
+    return v;
 }
 
 function incrementCounter(delta = 1) {
@@ -318,21 +355,13 @@ function incrementCounter(delta = 1) {
     counter += delta;
 }
 
-function crcl(x, radius, x0, y0) {
-    let a = pow(radius, 2) - pow(x - x0, 2);
-    if (a < 0) {
-        // a = abs(a);
-    }
-    return y0 + sqrt(a);
-}
-
 function data_key(data_len, key) {
     if (key >= 0 && key < data_len) {
         return key;
     }
 
     if (key > 0) {
-        return data_key(data_len, abs(data_len - key));
+        return data_key(data_len, Math.abs(data_len - key));
     }
 
     return data_key(data_len, data_len + key);
@@ -363,20 +392,20 @@ function alignToRow(endCallback) {
 function tickCounter(v) {
     isCounterAnimation = true;
 
-    if (!sss) {
-        sss = counter;
+    if (!counterPrevTickValue) {
+        counterPrevTickValue = counter;
     }
-    counterDelta = v - sss;
+    counterDelta = v - counterPrevTickValue;
     counter += counterDelta;
     // print(counter.toFixed(2));
-    // incrementCounter(v - sss);
-    sss = v;
+    // incrementCounter(v - counterPrevTickValue);
+    counterPrevTickValue = v;
 }
 
 function animCounterStop() {
     isCounterAnimation = false;
     counterDelta = 0;
-    sss = 0;
+    counterPrevTickValue = 0;
 
     // setTimeout(idle, 1000);
 }
@@ -392,10 +421,9 @@ function animate(tickHook, startNum, endNum, duration, callback, easingEq) {
                 completionNorm = easingEq(timeNorm),
                 newNum = startNum + completionNorm * changeInNum;
 
-            text(`${startNum}:${endNum}=${newNum}`, 0, height - 30);
+            // text(`${startNum}:${endNum}=${newNum}`, 0, height - 30);
 
             if (timeSpent > duration) {
-                // clearTimeout(engine);
                 animationsMap.delete(`${startNum},${endNum},${duration}`);
                 if (callback) {
                     callback();
