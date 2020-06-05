@@ -57,13 +57,13 @@ class Video {
     }
 
     _saveVolume() {
-        storeItem('volume', this._range.value * 10);
+        localStorage.setItem('volume', this._range.value);
     }
 
     _loadVolume() {
-        const vol = getItem('volume');
-        if (typeof(vol) === "number") {
-            this._range.value = vol / 10;
+        const vol = localStorage.getItem('volume');
+        if (vol) {
+            this._range.value = vol;
         }
     }
 }

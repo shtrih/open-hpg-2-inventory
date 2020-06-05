@@ -7,9 +7,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background: #19153a;
-	/*background: #19153a url("chrome_2020-05-12_02-13-37.png") no-repeat -10px -75px;*/
-	max-height: 800px;
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
 }
 .content {
 	display: flex;
@@ -17,7 +21,6 @@ html, body {
 	align-content: center;
 	align-items: center;
 	position: relative;
-	margin: 6% auto;
 	max-width: 1000px;
 }
 #canvas {
@@ -25,7 +28,7 @@ html, body {
 }
 #video {
 	position: absolute;
-	right: 0;
+	right: -25%;
 }
 #video video {
 	height: 400px;
@@ -41,12 +44,12 @@ html, body {
 	box-shadow: 0 0 30px #19153a;
 }
 #volume-control {
-	position: absolute;
-	bottom: -20px;
+	/*position: absolute;*/
+	/*bottom: -20px;*/
 }
 
 button, input, optgroup, select, textarea {
-	margin: 0 4px 0 0;
+	margin: 0 4px;
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
@@ -76,7 +79,7 @@ button, .btn {
 	border-radius: .25rem;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
-	color: #fff;
+	color: #eee;
 	background-color: #007bff;
 	border: 1px solid #007bff;
 }
@@ -181,3 +184,24 @@ button:focus {
 /*		margin: 0 auto 20px auto;*/
 /*	}*/
 /*}*/
+#wheel-data-sets {
+	position: absolute;
+	bottom: -30px;
+	color: #fff;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+#custom-list {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -25%;
+	color: #eee;
+	background-color: #272167;
+	padding: 10px;
+	border-radius: .25rem;
+	border: 1px solid #332a7e;
+	text-align: center;
+	display: none;
+}

@@ -5,9 +5,6 @@
     <title>Wheel of decisions</title>
 
     <link rel="stylesheet" href="index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
-    <script src="video.js"></script>
-    <script src="index.js"></script>
 </head>
 <body>
     <div class="image-grid-view">
@@ -343,7 +340,49 @@
             <div class="overlay"></div>
         </div>
         <div id="canvas"></div>
-        <input id="volume-control" type="range" step="0.1" value="0.5" max="1" min="0" title="Громкость видео" />
+
+        <div id="wheel-data-sets">
+            <input id="volume-control" type="range" step="0.1" value="0.5" max="1" min="0" title="Громкость видео" />
+
+            <div>
+                <input type="radio" id="huey" name="list" value="inventory" checked>
+                <label for="huey">Предметы</label>
+            </div>
+
+            <div>
+                <input type="radio" id="dewey" name="list" value="effects">
+                <label for="dewey">Эффекты</label>
+            </div>
+
+            <div>
+                <input type="radio" id="louie" name="list" value="coin">
+                <label for="louie">Монетка</label>
+            </div>
+
+            <div>
+                <input type="radio" id="webby" name="list" value="streamers">
+                <label for="webby">Участники ХПГ 2</label>
+            </div>
+
+            <div>
+                <input type="radio" id="scrooge" name="list" value="custom">
+                <label for="scrooge">Свой список</label>
+            </div>
+        </div>
+
+        <div id="custom-list">
+            <label>
+                Свой список<br />
+                <textarea rows="15" cols="50"></textarea>
+            </label>
+            <br />
+            <button>Ok</button>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
+    <script src="sketch.js"></script>
+    <script src="video.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
