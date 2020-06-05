@@ -14,6 +14,7 @@ html, body {
 	align-content: center;
 	align-items: center;
 	justify-content: center;
+	font-family: Calibri, serif;
 }
 .content {
 	display: flex;
