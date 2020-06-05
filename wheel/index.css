@@ -1,0 +1,207 @@
+/*
+ * Copyright (c) 2020. shtrih
+ */
+@import url(range.css);
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #19153a;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+.content {
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+	position: relative;
+	max-width: 1000px;
+}
+#canvas {
+	position: relative;
+}
+#video {
+	position: absolute;
+	right: -25%;
+}
+#video video {
+	height: 400px;
+	object-fit: cover;
+	display: none;
+}
+#video .overlay {
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: radial-gradient(closest-side, #00000000, #19153a);
+	box-shadow: 0 0 30px #19153a;
+}
+#volume-control {
+	/*position: absolute;*/
+	/*bottom: -20px;*/
+}
+
+button, input, optgroup, select, textarea {
+	margin: 0 4px;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+button, input {
+	overflow: visible;
+}
+button, select {
+	text-transform: none;
+}
+[type=button], [type=reset], [type=submit], button {
+	-webkit-appearance: button;
+}
+button, .btn {
+	display: inline-block;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+	color: #eee;
+	background-color: #007bff;
+	border: 1px solid #007bff;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+	cursor: pointer;
+}
+button:hover {
+	color: #fff;
+	background-color: #0069d9;
+	border-color: #0062cc;
+}
+button:not(:disabled):not(.disabled):active {
+	color: #fff;
+	background-color: #0062cc;
+	border-color: #005cbf;
+}
+button:focus {
+	outline: 0;
+	color: #fff;
+	background-color: #0069d9;
+	border-color: #0062cc;
+	box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
+}
+
+.image-grid {
+	min-width: 1280px;
+	position: absolute;
+	animation: animatedBackground 40s linear infinite;
+	opacity: .5;
+	height: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	flex-basis: auto;
+	flex-grow: 1;
+	/*justify-content: flex-start;*/
+	/*align-content: flex-start;*/
+	justify-content: space-between;
+	align-content: space-between;
+	padding: .1vh;
+	margin: 0 0;
+}
+.image-grid-item {
+	display: block;
+	opacity: .8;
+	transform: scale(1);
+	margin: auto;
+}
+.image-grid-item-container {
+	list-style: none;
+	max-width: 120px;
+	min-width: 60px;
+	max-height: 120px;
+	margin: 40px;
+	overflow: hidden;
+	display: flex;
+}
+.image-grid-view {
+	position: absolute;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+}
+.hero-background {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	/*height: 150%;*/
+	height: 100%;
+	/*background-color: #2b2b2b;*/
+	perspective: 700px;
+}
+.hero-background-overlay {
+	position: absolute;
+	background: linear-gradient(to bottom, rgba(49,52,61,0) 0%, rgba(25, 21, 58, 0.70) 50%, #19153a 100%);
+	/*height: 150%;*/
+	height: 100%;
+	width: 100%;
+	top: 0;
+}
+@keyframes animatedBackground {
+	0% {
+		opacity: 0;
+		transform: scale(1.25) rotateX(20deg) translateX(-10px) translateY(0)
+	}
+	5% {
+		opacity: 0.5;
+	}
+
+	97% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.25) rotateX(25deg) translateX(-10px) translateY(-50%)
+	}
+}
+.animation-paused {
+	animation-play-state: paused;
+}
+/*@media (max-height: 500px) {*/
+/*	.content {*/
+/*		margin: 0 auto 20px auto;*/
+/*	}*/
+/*}*/
+#wheel-data-sets {
+	position: absolute;
+	bottom: -30px;
+	color: #fff;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+#custom-list {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -25%;
+	color: #eee;
+	background-color: #272167;
+	padding: 10px;
+	border-radius: .25rem;
+	border: 1px solid #332a7e;
+	text-align: center;
+	display: none;
+}
