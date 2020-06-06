@@ -88,6 +88,7 @@ function wheelSketch(_p5) {
                 video.play().catch(console.error);
                 decreaseVolume(duration);
 
+                array_shuffle(data);
                 const $dataKey = data_key(data.length, 2 - randomKey);
                 // button.elt.textContent = `Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`;
                 // _p5.print(`Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`);
@@ -489,5 +490,12 @@ function wheelSketch(_p5) {
      */
     function easeInOutSine(x) {
         return -(Math.cos(Math.PI * x) - 1) / 2;
+    }
+
+    function array_shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 }
