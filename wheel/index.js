@@ -96,7 +96,7 @@ const dataSets = {
         'Ребро!',
     ],
     streamers: [
-        'Mistafaker',
+        'MistaFaker',
         'Lasqa',
         'Liz0n',
         'Melharucos',
