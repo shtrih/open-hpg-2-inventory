@@ -15,6 +15,7 @@ html, body {
 	align-items: center;
 	justify-content: center;
 	font-family: Calibri, serif;
+	color: #eee;
 }
 .content {
 	display: flex;
@@ -188,7 +189,7 @@ button:focus {
 #wheel-data-sets {
 	position: absolute;
 	bottom: -30px;
-	color: #fff;
+	color: #ccc;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -198,7 +199,6 @@ button:focus {
 	left: 50%;
 	top: 50%;
 	margin: -25%;
-	color: #eee;
 	background-color: #272167;
 	padding: 10px;
 	border-radius: .25rem;
