@@ -30,7 +30,7 @@ html, body {
 }
 #video {
 	position: absolute;
-	right: -25%;
+	right: -20%;
 }
 #video video {
 	height: 400px;
@@ -188,7 +188,7 @@ button:focus {
 /*}*/
 #wheel-data-sets {
 	position: absolute;
-	bottom: -30px;
+	bottom: -100px;
 	color: #ccc;
 	display: flex;
 	width: 100%;
