@@ -49,7 +49,7 @@ class Video {
     randomizeVideo() {
         do {
             this._current_index = this._getRandomIndex();
-            this._source.src = this._urls[ index ];
+            this._source.src = this._urls[ this._current_index ];
         } while (this._previous_url === this._source.src);
 
         this._previous_url = this._source.src;
