@@ -110,7 +110,7 @@ const p5Instance = new p5(wheelSketch);
 p5Instance.setData(dataSets['inventory']);
 p5Instance.onAfterSetup = function () {
     p5Instance.setVideos([
-        'videos/14278244937910.webm',
+        // 'videos/14278244937910.webm',
         'videos/14686000376951.webm',
         'videos/6 отвлекающих кадров.mp4',
         'videos/[Re-upload] [1080p] HONK HONK.mp4',
@@ -119,8 +119,26 @@ p5Instance.onAfterSetup = function () {
         'videos/Пузантос - Бумаги [Morrowind].mp4',
         'videos/Сыновья России. Кто пчелок уважает.mp4',
         'videos/Крутое ХПГ.webm',
+        'videos/01.mp4',
+        'videos/01.mp4',
+        'videos/02.mp4',
+        'videos/03.mp4',
+        'videos/04.mp4',
+        'videos/06.mp4',
+        'videos/08.mp4',
+        'videos/09.mp4',
+        'videos/10.mp4',
+        'videos/12.mp4',
+        'videos/13.mp4',
+        'videos/14.mp4',
+        'videos/16.mp4',
+        'videos/17.mp4',
+        'videos/18.mp4',
+        'videos/19.mp4',
+        'videos/20.mp4',
+        'videos/21.mp4',
     ], [
-        0,
+        // 0,
         0,
         0,
         0,
@@ -128,7 +146,6 @@ p5Instance.onAfterSetup = function () {
         6,
         129,
         26,
-        0
     ]);
 };
 
