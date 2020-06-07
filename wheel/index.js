@@ -164,6 +164,7 @@ customButton.addEventListener('click', function () {
 let radios = document.querySelectorAll('[name="list"]');
 for(let i = 0; i < radios.length; i++) {
     radios[i].addEventListener('change', function () {
+        customDialog.style.display = 'none';
         if (this.value === 'custom') {
             customDialog.style.display = 'block';
 

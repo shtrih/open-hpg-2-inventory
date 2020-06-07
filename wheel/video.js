@@ -7,7 +7,6 @@ class Video {
      * @type Array startTimes
      */
     constructor(videoURLs, startTimes = []) {
-        console.log(videoURLs, startTimes);
         this._current_index = null;
         this._previous_url = null;
         this._urls = videoURLs;
