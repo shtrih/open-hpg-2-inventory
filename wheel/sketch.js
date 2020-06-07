@@ -58,7 +58,16 @@ function wheelSketch(_p5) {
         // counter = height_str * 3 + radius - circleTop + radius;
         counter = counterInitial;
         // counter = height_str/2;
+
         video = new Video(videosList);
+
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === 'visible') {
+                video.setVolume(video.volume);
+            } else {
+                video.setVolume(0);
+            }
+        });
 
         // frameRate(30);
         _p5.textSize(23);
