@@ -14,10 +14,7 @@ function wheelSketch(_p5) {
     let data = [],
         videosList = [
             'videos/14278244937910.webm',
-            'videos/14286028220660.webm',
-            'videos/14503864709740.webm',
             'videos/14686000376951.webm',
-            'videos/15372952606420.mp4',
         ],
         counter,
         counterDelta = 0,
@@ -40,12 +37,11 @@ function wheelSketch(_p5) {
         counter = counterInitial;
     };
 
-    _p5.setVideos = function (_data) {
-        videosList = _data;
-
-        video = new Video(videosList);
+    _p5.setVideos = function (videosList, startTimes) {
+        video = new Video(videosList, startTimes);
     };
 
+    _p5.onAfterSetup = function() {};
 
     _p5.preload = () => {
         fontRegular = _p5.loadFont('./Oswald-Regular.ttf');
@@ -80,7 +76,7 @@ function wheelSketch(_p5) {
         // button.position(width / 2, height);
         button.mousePressed(function () {
             if (!isCounterAnimation) {
-                const duration = 20000,
+                const duration = 22000,
                     correction = data_key(data.length, 2 - selectedKey),
                     randomKey = Math.floor(_p5.random(data.length)),
                     totalRows = (data.length * circlesCountForDataLength() + randomKey - correction)
@@ -116,6 +112,8 @@ function wheelSketch(_p5) {
 
             return false;
         });
+
+        _p5.onAfterSetup();
     };
 
     function decreaseVolume(videoDurationMs) {
@@ -128,7 +126,7 @@ function wheelSketch(_p5) {
     }
 
     function circlesCountForDataLength() {
-        const needHeight = height_str * itemsPerScreen * 5;
+        const needHeight = height_str * itemsPerScreen * 6;
         return Math.ceil(needHeight / (height_str * data.length));
     }
 

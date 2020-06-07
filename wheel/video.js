@@ -4,10 +4,14 @@
 class Video {
     /**
      * @type Array videoURLs
+     * @type Array startTimes
      */
-    constructor(videoURLs) {
+    constructor(videoURLs, startTimes = []) {
+        console.log(videoURLs, startTimes);
+        this._current_index = null;
         this._previous_url = null;
         this._urls = videoURLs;
+        this._startTimes = startTimes;
         /**@type HTMLVideoElement */
         this._video = document.querySelector('video');
         /**@type HTMLSourceElement*/
@@ -22,7 +26,7 @@ class Video {
     }
 
     async play() {
-        this._video.currentTime = 0;
+        this._resetCurrentTime();
         this._video.volume = this.volume;
         this._video.style.display = 'unset';
         await this._video.play();
@@ -44,7 +48,8 @@ class Video {
 
     randomizeVideo() {
         do {
-            this._source.src = this._urls[ this._getRandomIndex() ];
+            this._current_index = this._getRandomIndex();
+            this._source.src = this._urls[ index ];
         } while (this._previous_url === this._source.src);
 
         this._previous_url = this._source.src;
@@ -65,5 +70,9 @@ class Video {
         if (vol) {
             this._range.value = vol;
         }
+    }
+
+    _resetCurrentTime() {
+        this._video.currentTime = this._startTimes[ this._current_index ] || 0;
     }
 }
