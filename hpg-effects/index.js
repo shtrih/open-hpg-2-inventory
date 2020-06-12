@@ -268,6 +268,11 @@ const items = [
         title: 'Полное свинство',
         type: EFFECT_TYPES.TARGET_TRAP,
     },
+    {
+        img: 'images/072.png',
+        title: 'Хакерский компьютер',
+        type: EFFECT_TYPES.BUFF,
+    },
 ];
 let selectedCellKey = false;
 
