@@ -6,7 +6,6 @@ function wheelSketch(_p5) {
     const radius = 160,
         diameter = radius * 2,
         itemsPerScreen = 7,
-        padding = 0,
         height_str = diameter / itemsPerScreen,
         counterInitial = 0,
         centerX = 60
@@ -135,7 +134,7 @@ function wheelSketch(_p5) {
     }
 
     function circlesCountForDataLength() {
-        const needHeight = height_str * itemsPerScreen * 6;
+        const needHeight = height_str * itemsPerScreen * 7;
         return Math.ceil(needHeight / (height_str * data.length));
     }
 
@@ -158,7 +157,7 @@ function wheelSketch(_p5) {
             return;
         }
 
-        incrementCounter(_p5.movedY * 3);
+        incrementCounter(_p5.movedY * 4);
 
         return false;
     };
@@ -259,7 +258,7 @@ function wheelSketch(_p5) {
         if (counterDelta > 0) {
             if (counter < counterMax) {
                 if (!isCounterAnimation) {
-                    incrementCounter(1);
+                    incrementCounter(3);
                 }
             }
             else {
@@ -366,7 +365,7 @@ function wheelSketch(_p5) {
         animate(
             tickCounter,
             counter,
-            newValue + padding,
+            newValue,
             1000,
             function () {
                 animCounterStop();
