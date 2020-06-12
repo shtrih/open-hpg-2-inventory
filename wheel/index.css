@@ -202,6 +202,10 @@ button:focus {
 	text-align: center;
 	display: none;
 }
+#custom-list textarea {
+	background-color: #151235;
+	color: #eee;
+}
 #video-suggest {
 	display: block;
 	width: 24px;
