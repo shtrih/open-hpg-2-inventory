@@ -189,6 +189,7 @@ button:focus {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	user-select: none;
 }
 #custom-list {
 	position: absolute;
