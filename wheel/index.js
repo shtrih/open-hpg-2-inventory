@@ -158,17 +158,21 @@ customButton.addEventListener('click', function () {
     customDialog.style.display = 'none';
 
     p5Instance.setData(customTextarea.value.split('\n'));
+    p5Instance.mouseDragEnable();
 });
 
 let radios = document.querySelectorAll('[name="list"]');
 for(let i = 0; i < radios.length; i++) {
     radios[i].addEventListener('click', function () {
-        customDialog.style.display = 'none';
         if (this.value === 'custom') {
+            p5Instance.mouseDragEnable(false);
             customDialog.style.display = 'block';
 
             return;
         }
+
+        customDialog.style.display = 'none';
+        p5Instance.mouseDragEnable();
 
         p5Instance.setData(dataSets[this.value]);
     });

@@ -26,7 +26,8 @@ function wheelSketch(_p5) {
         counterPrevTickValue = 0,
         video,
         scaleFactor,
-        fontRegular
+        fontRegular,
+        mouseDragEnable = true
     ;
 
     _p5.setData = function (_data) {
@@ -138,6 +139,7 @@ function wheelSketch(_p5) {
         return Math.ceil(needHeight / (height_str * data.length));
     }
 
+    /*
     _p5.mouseReleased = () => {
         if (_p5.mouseX > _p5.width || _p5.mouseY > _p5.height) {
             return;
@@ -148,12 +150,21 @@ function wheelSketch(_p5) {
 
         // setTimeout(alignToRow, 1000);
     };
+    */
+
+    _p5.mouseDragEnable = (state = true) => {
+        mouseDragEnable = state;
+    };
 
     _p5.mouseDragged = (event) => {
         if (_p5.mouseX > _p5.width || _p5.mouseY > _p5.height) {
             return;
         }
         if (isCounterAnimation) {
+            return;
+        }
+
+        if (!mouseDragEnable) {
             return;
         }
 
