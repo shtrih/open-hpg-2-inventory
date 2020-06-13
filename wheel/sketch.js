@@ -373,6 +373,10 @@ function wheelSketch(_p5) {
     }
 
     function data_key(data_len, key) {
+        if (!data_len) {
+            return key;
+        }
+
         if (key >= 0 && key < data_len) {
             return key;
         }
