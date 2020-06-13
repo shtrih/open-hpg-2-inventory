@@ -140,6 +140,8 @@ const p5Instance = new p5(wheelSketch);
 p5Instance.setData(dataSets[currentDataSet]);
 p5Instance.onAfterSetup = function () {
     p5Instance.setVideos([
+        'videos/учит крутить рулём под phonk.mp4',
+        'videos/Папич-марш  прощание славянки .9мая.mp4',
         'videos/Putin walking meme (Full version).mp4',
         'videos/BASSBOOSTED   Смешарики-От винта.mp4',
         'videos/JOJO\'S BIZARRE MAKEUP TUTORIAL.mp4',
@@ -152,6 +154,7 @@ p5Instance.onAfterSetup = function () {
         'videos/Крутое ХПГ.webm',
         'videos/CHIKA VIBES   Kaguya-sama Love is War.mp4',
         'videos/best Chika meme ever   anime characters in Chika dance MV.mp4',
+        'videos/Не Твое Дело - Я буду рядом.mp4',
         'videos/01.mp4',
         'videos/02.mp4',
         'videos/03.mp4',
@@ -170,6 +173,8 @@ p5Instance.onAfterSetup = function () {
         // 'videos/20.mp4',
         // 'videos/21.mp4',
     ], [
+        5,
+        7,
         32,
         22,
         6,
