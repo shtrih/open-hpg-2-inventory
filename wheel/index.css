@@ -236,7 +236,8 @@ button:focus {
 }
 #item-image .arc {
 	position: absolute;
-	background: url(arc.png) no-repeat 94px center;
+	/*background: url(arc2.png) no-repeat 30px center;*/
+	background: url(arc3.png) no-repeat 60px center;
 	height: 100%;
 	width: 200px;
 }
