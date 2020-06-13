@@ -102,6 +102,8 @@ function wheelSketch(_p5) {
                 decreaseVolume(duration);
 
                 array_shuffle(data);
+                _p5.triggerSelectItem();
+
                 const $dataKey = data_key(data.length, 2 - randomKey);
                 // button.elt.textContent = `Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`;
                 // _p5.print(`Result ${randomKey} → ${$dataKey}. ${data[$dataKey]}`);
