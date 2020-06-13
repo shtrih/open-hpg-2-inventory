@@ -132,7 +132,22 @@ function getImageURI(index) {
     switch (currentDataSet) {
         case "inventory":
             offset = 50;
+            result = '../hpg-inventory/images/0' + ('0' + (index+1 + offset)).slice(-2) + '.png';
+            break;
+
         case "effects":
+            // костыли из-за удалённых спецроллов
+            if (index > 23) {
+                offset += 1;
+            }
+            if (index > 24) {
+                offset += 4;
+            }
+            if (index > 38) {
+                offset += 1;
+            }
+
+            result = '../hpg-inventory/images/0' + ('0' + (index+1 + offset)).slice(-2) + '.png';
             break;
 
         case "debuffs":
