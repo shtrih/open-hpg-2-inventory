@@ -44,7 +44,7 @@ html, body {
 	height: 100%;
 	position: absolute;
 	background: radial-gradient(closest-side, #00000000, #19153a);
-	box-shadow: 0 0 30px #19153a;
+	/*box-shadow: 0 0 30px #19153a;*/
 }
 #volume-control {
 	/*position: absolute;*/
