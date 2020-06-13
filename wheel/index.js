@@ -104,10 +104,40 @@ const dataSets = {
         'UncleBjorn',
     ],
 };
+let currentDataSet = 'inventory';
+
+function getImageURI(index) {
+    let result = '',
+        offset = 0
+    ;
+    switch (currentDataSet) {
+        case "inventory":
+            offset = 50;
+        case "effects":
+            result = '../hpg-inventory/images/0' + ('0' + (index+1 + offset)).slice(-2) + '.png';
+            break;
+
+        case "coin":
+            result = '../images/coin-obverse-20.png';
+            if (index === 1) {
+                result = '../images/coin-reverse-20.png';
+            }
+            if (index === 10) {
+                result = '../images/coin-gurt.png';
+            }
+            break;
+
+        case "streamers":
+            result = '../images/streamers/'+ dataSets[currentDataSet][index] +'.png';
+            break;
+    }
+
+    return result;
+}
 
 const p5Instance = new p5(wheelSketch);
 
-p5Instance.setData(dataSets['inventory']);
+p5Instance.setData(dataSets[currentDataSet]);
 p5Instance.onAfterSetup = function () {
     p5Instance.setVideos([
         'videos/Putin walking meme (Full version).mp4',
@@ -148,6 +178,15 @@ p5Instance.onAfterSetup = function () {
     ]);
 };
 
+const image = document.querySelector('#item-image img');
+p5Instance.onSelectItem = function(data, selectedKey) {
+    if (dataSets[currentDataSet]) {
+        image.src = getImageURI(dataSets[currentDataSet].indexOf(data[selectedKey]));
+    }
+    else {
+        image.src = '';
+    }
+};
 
 const customDialog = document.getElementById('custom-list'),
     customTextarea = customDialog.getElementsByTagName('textarea')[0],
@@ -164,6 +203,8 @@ customButton.addEventListener('click', function () {
 let radios = document.querySelectorAll('[name="list"]');
 for(let i = 0; i < radios.length; i++) {
     radios[i].addEventListener('click', function () {
+        currentDataSet = this.value;
+
         if (this.value === 'custom') {
             p5Instance.mouseDragEnable(false);
             customDialog.style.display = 'block';
@@ -174,6 +215,6 @@ for(let i = 0; i < radios.length; i++) {
         customDialog.style.display = 'none';
         p5Instance.mouseDragEnable();
 
-        p5Instance.setData(dataSets[this.value]);
+        p5Instance.setData(dataSets[currentDataSet]);
     });
 }

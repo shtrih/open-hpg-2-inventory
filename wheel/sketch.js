@@ -31,10 +31,11 @@ function wheelSketch(_p5) {
     ;
 
     _p5.setData = function (_data) {
-        data = _data;
+        data = [..._data];
 
         counterMax = data.length * height_str;
         counter = counterInitial;
+        _p5.triggerSelectItem();
     };
 
     _p5.setVideos = function (videosList, startTimes) {
@@ -42,6 +43,11 @@ function wheelSketch(_p5) {
     };
 
     _p5.onAfterSetup = function() {};
+
+    _p5.onSelectItem = function (items, selectedKey) {};
+    _p5.triggerSelectItem = function () {
+        _p5.onSelectItem(data, selectedKey);
+    };
 
     _p5.preload = () => {
         fontRegular = _p5.loadFont('./Oswald-Regular.ttf');
@@ -53,7 +59,13 @@ function wheelSketch(_p5) {
         const canvas = _p5.createCanvas(750, 400);
         canvas.parent('canvas');
 
-        circleTop = (_p5.height - diameter) / 2;
+        _p5.textSize(23);
+        // textFont('Calibri');
+        _p5.textFont(fontRegular);
+        _p5.textLeading(24);
+        _p5.fill(200);
+
+        circleTop = (_p5.height - diameter) / 2 + _p5.textAscent() / 3;
         circleCenterY = circleTop + radius;
         // counter = height_str * 3 + radius - circleTop + radius;
         counter = counterInitial;
@@ -70,11 +82,7 @@ function wheelSketch(_p5) {
         });
 
         // frameRate(30);
-        _p5.textSize(23);
-        // textFont('Calibri');
-        _p5.textFont(fontRegular);
-        _p5.textLeading(24);
-        _p5.fill(200);
+
 
         // alignToRow();
 
@@ -260,7 +268,10 @@ function wheelSketch(_p5) {
             //</editor-fold>
         */
 
-        vect(counter, counterInitial, counterMax);
+        // vect(counter, counterInitial, counterMax);
+
+        // _p5.line(centerX + 60, 0, centerX + 60, _p5.height);
+        // _p5.line(0, _p5.height / 2, _p5.width, _p5.height / 2);
 
         animationsMap.forEach(function (startAnimation) {
             startAnimation();
@@ -290,7 +301,7 @@ function wheelSketch(_p5) {
             // let x = crcl(counter + height_str * i, radius, circleTop, centerX);
             let {x, y} = vect(counter + height_str * i + radius, circleTop, circleTop + diameter, false);
             // x += centerX;
-            if (x < centerX - 30) {
+            if (x < centerX - 45) {
                 continue;
             }
 
@@ -320,7 +331,11 @@ function wheelSketch(_p5) {
 
                 // textSize(25);
                 // textStyle(BOLD);
-                selectedKey = key;
+                if (key !== selectedKey) {
+                    selectedKey = key;
+
+                    _p5.onSelectItem(data, selectedKey);
+                }
             }
             // line(0, textAscent(), width, textAscent());
 
@@ -332,18 +347,19 @@ function wheelSketch(_p5) {
     };
 
     function vect(current, from, to, overflow = true) {
-        const offset = -11.44, // выравниваем центральный элемент списка вертикально по центру
-            overallDegrees = _p5.map(current + offset, from + offset, to, -80, 80, !overflow),
+        const offset = 7, // выравниваем центральный элемент списка вертикально по центру
+            overallDegrees = _p5.map(current + offset, from + offset, to, -85, 85, !overflow),
             v = p5.Vector.fromAngle(_p5.radians(overallDegrees), radius)
         ;
-        // push();
-        // translate(centerX, height / 2);
-        // noFill();
-        // stroke(255);
-        // line(0, 0, radius, 0);
-        // stroke(250);
-        // line(0, 0, v.x, v.y);
-        // pop();
+
+        // _p5.push();
+        // _p5.translate(centerX, _p5.height / 2);
+        // _p5.noFill();
+        // _p5.stroke(255);
+        // _p5.line(0, 0, radius, 0);
+        // _p5.stroke(250);
+        // _p5.line(0, 0, v.x, v.y);
+        // _p5.pop();
 
         return v;
     }
