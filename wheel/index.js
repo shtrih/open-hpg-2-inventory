@@ -107,7 +107,7 @@ const dataSets = {
 let currentDataSet = 'inventory';
 
 function getImageURI(index) {
-    let result = '',
+    let result = '../hpg-inventory/images/000.png',
         offset = 0
     ;
     switch (currentDataSet) {
@@ -184,7 +184,7 @@ p5Instance.onSelectItem = function(data, selectedKey) {
         image.src = getImageURI(dataSets[currentDataSet].indexOf(data[selectedKey]));
     }
     else {
-        image.src = '';
+        image.src = '../hpg-inventory/images/000.png';
     }
 };
 
