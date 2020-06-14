@@ -211,6 +211,7 @@ p5Instance.onAfterSetup = function () {
         'videos/CHIKA VIBES   Kaguya-sama Love is War.mp4',
         'videos/best Chika meme ever   anime characters in Chika dance MV.mp4',
         'videos/Не Твое Дело - Я буду рядом.mp4',
+        'videos/Music make you lose control triangle.mp4',
         'videos/01.mp4',
         'videos/02.mp4',
         'videos/03.mp4',
