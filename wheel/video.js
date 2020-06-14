@@ -4,13 +4,10 @@
 class Video {
     /**
      * @type Array videoURLs
-     * @type Array startTimes
      */
-    constructor(videoURLs, startTimes = []) {
+    constructor(videoURLs) {
         this._current_index = null;
-        this._previous_url = null;
         this._urls = videoURLs;
-        this._startTimes = startTimes;
         /**@type HTMLVideoElement */
         this._video = document.querySelector('video');
         /**@type HTMLSourceElement*/
@@ -21,7 +18,8 @@ class Video {
             this.setVolume(this._range.value);
             this._saveVolume();
         });
-        this.randomizeVideo();
+        Video._shuffle(this._urls);
+        this.changeVideo(0);
     }
 
     async play() {
@@ -34,7 +32,7 @@ class Video {
     pause() {
         this._video.pause();
         this._video.style.display = 'none';
-        this.randomizeVideo();
+        this.changeVideo();
     }
 
     setVolume(number) {
@@ -45,13 +43,23 @@ class Video {
         return Number(this._range.value);
     }
 
-    randomizeVideo() {
-        do {
-            this._current_index = this._getRandomIndex();
-            this._source.src = this._urls[ this._current_index ];
-        } while (this._previous_url === this._source.src && this._urls.length > 1);
+    changeVideo(forceIndex) {
+        if (Number.isInteger(forceIndex)) {
+            this._current_index = forceIndex;
+        }
+        else {
+            this._current_index++;
+        }
 
-        this._previous_url = this._source.src;
+        if (this._current_index >= this._urls.length) {
+            Video._shuffle(this._urls);
+            this._current_index = 0;
+        }
+
+        this._source.src = this._urls[ this._current_index ];
+        if (Array.isArray(this._urls[ this._current_index ])) {
+            this._source.src = this._urls[ this._current_index ][0];
+        }
 
         this._video.load();
     }
@@ -72,6 +80,16 @@ class Video {
     }
 
     _resetCurrentTime() {
-        this._video.currentTime = this._startTimes[ this._current_index ] || 0;
+        this._video.currentTime = 0;
+        if (Array.isArray(this._urls[ this._current_index ])) {
+            this._video.currentTime = this._urls[ this._current_index ][1] || 0;
+        }
+    }
+
+    static _shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 }

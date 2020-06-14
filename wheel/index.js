@@ -196,13 +196,13 @@ const p5Instance = new p5(wheelSketch);
 p5Instance.setData(dataSets[currentDataSet]);
 p5Instance.onAfterSetup = function () {
     p5Instance.setVideos([
-        'videos/учит крутить рулём под phonk.mp4',
-        'videos/Папич-марш  прощание славянки .9мая.mp4',
-        'videos/Putin walking meme (Full version).mp4',
-        'videos/BASSBOOSTED   Смешарики-От винта.mp4',
-        'videos/JOJO\'S BIZARRE MAKEUP TUTORIAL.mp4',
-        'videos/Пузантос - Бумаги [Morrowind].mp4',
-        'videos/Сыновья России. Кто пчелок уважает.mp4',
+        ['videos/учит крутить рулём под phonk.mp4', 5],
+        ['videos/Папич-марш  прощание славянки .9мая.mp4', 7],
+        ['videos/Putin walking meme (Full version).mp4', 32],
+        // ['videos/BASSBOOSTED   Смешарики-От винта.mp4', 22],
+        ['videos/JOJO\'S BIZARRE MAKEUP TUTORIAL.mp4', 6],
+        ['videos/Пузантос - Бумаги [Morrowind].mp4', 129],
+        ['videos/Сыновья России. Кто пчелок уважает.mp4', 26],
         // 'videos/14278244937910.webm',
         'videos/14686000376951.webm',
         'videos/6 отвлекающих кадров.mp4',
@@ -228,14 +228,6 @@ p5Instance.onAfterSetup = function () {
         'videos/19.mp4',
         // 'videos/20.mp4',
         // 'videos/21.mp4',
-    ], [
-        5,
-        7,
-        32,
-        22,
-        6,
-        129,
-        26,
     ]);
 };
 
