@@ -27,7 +27,8 @@ function wheelSketch(_p5) {
         video,
         scaleFactor,
         fontRegular,
-        mouseDragEnable = true
+        mouseDragEnable = true,
+        touchYPrev = 0
     ;
 
     _p5.setData = function (_data) {
@@ -178,7 +179,15 @@ function wheelSketch(_p5) {
             return;
         }
 
-        incrementCounter(_p5.movedY * 4);
+        let delta = _p5.movedY * 4;
+        // Для тач-девайсов эта переменная undefined, поэтому вручную считаем направление сдвига
+        if (_p5.movedY === undefined) {
+            let diff = _p5.touches[0].y - touchYPrev;
+            delta = (diff < 0 ? -1 : (diff === 0 ? 0 : 1)) * 12;
+            touchYPrev = _p5.touches[0].y;
+        }
+
+        incrementCounter(delta);
 
         return false;
     };
