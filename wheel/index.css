@@ -31,10 +31,10 @@ html, body {
 }
 #video {
 	position: absolute;
-	right: -20%;
+	left: 35%;
 }
 #video video {
-	height: 400px;
+	height: 450px;
 	object-fit: cover;
 	display: none;
 }
@@ -43,7 +43,7 @@ html, body {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	background: radial-gradient(closest-side, #00000000, #19153a);
+	background: radial-gradient(closest-side, transparent 70%, #19153a);
 	/*box-shadow: 0 0 30px #19153a;*/
 }
 #volume-control {
