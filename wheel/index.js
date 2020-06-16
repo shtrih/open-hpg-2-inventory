@@ -219,7 +219,7 @@ class Preset {
 
 class PresetAll extends Preset {
     constructor(isDefault) {
-        super('Выбрать все', [], isDefault);
+        super('Выбрать всё', [], isDefault);
     }
 }
 
