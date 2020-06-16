@@ -208,18 +208,31 @@
                 <label for="scrooge">Свой список</label>
             </div>
 
+
+            <div class="break"></div>
+
+            <button id="btn-edit" title="Редактировать список"></button>
+
             <a id="video-suggest"
                title="Предложить видео"
                href="https://docs.google.com/forms/d/e/1FAIpQLScnmgyKxHK9IY8x5u0lAJXNQWWC_Wypr-YyvNjUGpEZ3xi-aQ/viewform" target="_blank"></a>
         </div>
 
-        <div id="custom-list">
+        <div id="custom-list" class="dialog">
             <label>
                 Свой список<br />
                 <textarea rows="15" cols="50"></textarea>
             </label>
-            <br />
-            <button>Ok</button>
+            <hr />
+            <button>✔ Применить</button>
+        </div>
+
+        <div id="dialog-edit" class="dialog">
+            <div class="presets"></div>
+            <hr />
+            <div class="options"></div>
+            <hr />
+            <button class="apply">✔ Применить</button>
         </div>
     </div>
 

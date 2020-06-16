@@ -17,6 +17,12 @@ html, body {
 	font-family: Calibri, serif;
 	color: #eee;
 }
+a {
+	color: #9fd9ff;
+}
+a:hover {
+	color: #ddd;
+}
 .content {
 	display: flex;
 	justify-content: flex-start;
@@ -106,7 +112,13 @@ button:focus {
 	border-color: #0062cc;
 	box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
 }
-
+button:disabled {
+	opacity: .6;
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
+	cursor: not-allowed;
+}
 .image-grid {
 	min-width: 1280px;
 	position: absolute;
@@ -184,41 +196,73 @@ button:focus {
 }
 #wheel-data-sets {
 	position: absolute;
-	bottom: -100px;
+	bottom: -150px;
 	color: #ccc;
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
 	justify-content: space-between;
 	user-select: none;
+	/*opacity: 0.6;*/
+	/*transition: opacity 0.3s;*/
+}
+#wheel-data-sets:hover {
+	/*opacity: 1;*/
 }
 #wheel-data-sets .break {
 	flex-basis: 100%;
 	height: 14px;
 }
-#custom-list {
+.dialog {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	margin: -25%;
+	min-width: 250px;
 	background-color: #272167;
 	padding: 10px;
 	border-radius: .25rem;
-	border: 1px solid #332a7e;
+	border: 2px solid #332a7e;
 	text-align: center;
 	display: none;
+
+	z-index: 10; /* keep on top of other elements on the page */
+	outline: 9999px solid rgba(0,0,0,0.5);
 }
-#custom-list textarea {
+.dialog textarea {
 	background-color: #151235;
 	color: #eee;
 }
-#video-suggest {
+.dialog .options {
+	max-height: 300px;
+	text-align: left;
+	overflow-y: scroll;
+}
+.dialog hr {
+	width: 50%;
+	border-style: dashed;
+	border-width: 1px 0 0 0;
+}
+.dialog .presets {
+	text-align: left;
+}
+.dialog .presets a {
+	text-decoration: none;
+	border-bottom: 1px dotted;
+}
+#video-suggest,
+#btn-edit {
 	display: block;
 	width: 24px;
 	height: 24px;
 	background-size: 100%;
 	/* <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cdefs class='undefined'%3E%3Cstyle type='text/css'%3E .undefined%7B fill: %23ccc; %7D %3C/style%3E%3C/defs%3E%3Cpath d='M47 31c-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13S54.2 31 47 31zM47 55c-6.1 0-11-4.9-11-11s4.9-11 11-11 11 4.9 11 11S53.1 55 47 55z' class='undefined'/%3E%3Cpath d='M53 43h-5v-5c0-0.6-0.4-1-1-1s-1 0.4-1 1v5h-5c-0.6 0-1 0.4-1 1s0.4 1 1 1h5v5c0 0.6 0.4 1 1 1s1-0.4 1-1v-5h5c0.6 0 1-0.4 1-1S53.6 43 53 43z' class='undefined'/%3E%3Cpath d='M47 28c0.3 0 0.7 0 1 0.1V27h8v3.8c0.7 0.5 1.4 1 2 1.6V4c0-0.6-0.4-1-1-1H1C0.4 3 0 3.4 0 4v44c0 0.6 0.4 1 1 1h30.8C31.3 47.4 31 45.7 31 44 31 35.2 38.2 28 47 28zM48 5h8v9h-8V5zM48 16h8v9h-8V16zM10 47H2v-9h8V47zM10 36H2v-9h8V36zM10 25H2v-9h8V25zM10 14H2V5h8V14zM25 34c-0.2 0-0.3 0-0.5-0.1C24.2 33.7 24 33.4 24 33V19c0-0.4 0.2-0.7 0.5-0.9 0.3-0.2 0.7-0.2 1 0l11 7C36.8 25.3 37 25.7 37 26s-0.2 0.7-0.5 0.8l-11 7C25.4 33.9 25.2 34 25 34z' class='undefined'/%3E%3C/svg%3E ");
+}
+#btn-edit {
+	background-color: transparent;
+	border: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 20 20'%3E%3Cpath fill='%23ccc' stroke='%23557' stroke-linecap='square' stroke-linejoin='bevel' d='M10.005 1.005c-.467 0-.934.06-1.381.128-.071 1.146-.251 2.265-1.202 2.659-.953.394-1.847-.286-2.71-1.049a9.163 9.163 0 00-1.994 1.97c.765.864 1.47 1.754 1.074 2.71-.396.954-1.534 1.13-2.685 1.201a8.98 8.98 0 00-.102 1.38c0 .479.03.95.102 1.407 1.151.07 2.29.196 2.685 1.15.395.956-.309 1.897-1.074 2.762.548.748 1.245 1.396 1.994 1.943.86-.759 1.76-1.416 2.71-1.023.955.396 1.131 1.508 1.202 2.66a9.19 9.19 0 002.736 0c.07-1.152.247-2.264 1.201-2.66.95-.393 1.85.264 2.71 1.023.75-.547 1.446-1.195 1.995-1.943-.766-.865-1.47-1.806-1.074-2.761.395-.955 1.559-1.08 2.71-1.151.072-.458.102-.928.102-1.406 0-.472-.032-.929-.102-1.381-1.151-.07-2.315-.247-2.71-1.202-.396-.955.308-1.845 1.074-2.71a9.165 9.165 0 00-1.994-1.969c-.863.763-1.758 1.443-2.71 1.049-.951-.394-1.131-1.513-1.202-2.66a8.848 8.848 0 00-1.355-.127zm0 6.06c1.626 0 2.94 1.314 2.94 2.94s-1.314 2.94-2.94 2.94-2.966-1.314-2.966-2.94 1.34-2.94 2.966-2.94z' color='%23000'%2F%3E%3C%2Fsvg%3E");
 }
 /*
 @media (min-width: 1930px) {
@@ -250,4 +294,7 @@ button:focus {
 	width: 90px;
 	height: 90px;
 	filter: drop-shadow(0 0 2px #aaa);
+}
+#btn-edit {
+	font-size: 2em;
 }
