@@ -348,7 +348,7 @@ const p5Instance = new p5(wheelSketch);
 
 p5Instance.onAfterSetup = function () {
     p5Instance.setVideos([
-        ['videos/учит крутить рулём под phonk.mp4', 5],
+        // ['videos/учит крутить рулём под phonk.mp4', 5],
         ['videos/Папич-марш  прощание славянки .9мая.mp4', 7],
         ['videos/Putin walking meme (Full version).mp4', 32],
         // ['videos/BASSBOOSTED   Смешарики-От винта.mp4', 22],
@@ -360,6 +360,7 @@ p5Instance.onAfterSetup = function () {
         ['videos/All Star but they don\'t stop coming pitch corrected.mp4', 20],
         ['videos/U GOT THAT   LASQA EDITION.mp4', 9],
         ['videos/Pinoki - Pingana (Havana by Camila Cabello ft. Young Thug Remix).mp4', 54],
+        ['videos/Noisestorm - Crab Rave (Official Music Video).mp4', p5Instance.random([75, 137])],
         // 'videos/14278244937910.webm',
         'videos/14686000376951.webm',
         'videos/6 отвлекающих кадров.mp4',
@@ -371,12 +372,13 @@ p5Instance.onAfterSetup = function () {
         'videos/Music make you lose control triangle.mp4',
         'videos/Танец под волчок из  Что Где Когда.mp4',
         'videos/Лизон в ХПГ.mp4',
-        'videos/01.mp4',
+        'videos/Мэддисон дрифтит под Фонк.mp4',
+        // 'videos/01.mp4',
         'videos/02.mp4',
         'videos/03.mp4',
         // 'videos/04.mp4',
         'videos/06.mp4',
-        'videos/08.mp4',
+        // 'videos/08.mp4',
         // 'videos/09.mp4',
         // 'videos/10.mp4',
         'videos/12.mp4',
