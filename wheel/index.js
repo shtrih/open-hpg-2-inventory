@@ -359,6 +359,7 @@ p5Instance.onAfterSetup = function () {
         ['videos/Мэддисон - Shooting Stars.mp4', 13],
         ['videos/All Star but they don\'t stop coming pitch corrected.mp4', 20],
         ['videos/U GOT THAT   LASQA EDITION.mp4', 9],
+        ['videos/Pinoki - Pingana (Havana by Camila Cabello ft. Young Thug Remix).mp4', 54],
         // 'videos/14278244937910.webm',
         'videos/14686000376951.webm',
         'videos/6 отвлекающих кадров.mp4',
